@@ -1,35 +1,37 @@
-# Данные для формы сдачи
+# Submission form answers
 
-Форма: https://forms.cloud.microsoft/r/Yy6AXT5pe3
+Form: https://forms.cloud.microsoft/r/Yy6AXT5pe3
 
 ## 1 Diploma project title
 Development of an Application for Detecting Phishing and Fraudulent Messages
 
 ## 2 Supervisor full name
-Серек Азамат Галымжанович
+Azamat Galymzhanovich Serek
 
 ## 3 Team members and accounts
-1) Кендебаев Нұрасыл Ауесбекұлы — SE-2428 — Kendebaev — https://github.com/Kendebaev
-2) Амирханов Асхат Нурланулы — SE-2428 — askmirkhanov-boop — https://github.com/askmirkhanov-boop
+1) Nurassyl Auesbekuly Kendebaev - SE-2428 - Kendebaev - https://github.com/Kendebaev
+2) Askhat Nurlanuly Amirkhanov - SE-2428 - askmirkhanov-boop - https://github.com/askmirkhanov-boop
+
+Names are transliterated for this draft; confirm official Latin spellings before submission.
 
 ## 4 Repository URL
 https://github.com/Kendebaev/FraudShield
 
 ## 5 Tagged project version
-Заполняется после завершения проверки и фиксации реального тега `prob-period-1`. Тег пока не создан. Нельзя указывать несуществующую ссылку или перемещать ранее сданный тег.
+Complete only after review and creation of the actual `prob-period-1` tag. The tag does not exist yet. Do not provide a nonexistent link or move a previously submitted tag.
 
 ## 6 Responsibilities and contributions
-Кендебаев Нұрасыл Ауесбекұлы: планируемая ответственность — клиент, API, БД, данные и интеграция. Создана начальная версия документации и инфраструктуры сдачи с помощью ИИ; требуется проверка и подтверждение участником. Задачи DIP-1, DIP-2, DIP-4, DIP-6, DIP-7, DIP-9, DIP-10, DIP-12, DIP-14. Ссылки на принятые изменения следует уточнить после review.
+Nurassyl Auesbekuly Kendebaev: planned responsibility for the client, API, database, data collection and integration. Initial documentation and submission infrastructure were prepared with AI assistance; individual verification is pending. Tasks: DIP-1, DIP-2, DIP-4, DIP-6, DIP-7, DIP-9, DIP-10, DIP-12, DIP-14. Add links to accepted changes after review.
 
-Амирханов Асхат Нурланулы: планируемая ответственность — анализ текста/URL и оценка. Задачи DIP-3, DIP-5, DIP-8, DIP-11, DIP-13, DIP-15. Личные изменения и результаты review пока не предоставлены; нельзя утверждать выполнение этих задач от его имени.
+Askhat Nurlanuly Amirkhanov: planned responsibility for text/URL analysis and evaluation. Tasks: DIP-3, DIP-5, DIP-8, DIP-11, DIP-13, DIP-15. Individual changes and review results have not been supplied; completion cannot be claimed on his behalf.
 
-## 7 Current status limitations and next steps
-Подготовлены рабочий отчёт, обзор восьми научных работ и дополнительные источники, сравнение четырёх систем, технологии, требования, три диаграммы, макеты и план оценки. В YouTrack созданы 15 задач. Беседы с пользователями и содержательный отзыв руководителя не подтверждены. Реализованное приложение и измеренная точность не заявляются. Следующий шаг — проверить материалы обоими участниками и руководителем, дополнить фактические свидетельства, настроить персональные доступы, обновить PDF и зафиксировать тег сдачи.
+## 7 Current status and next steps
+A working report, review of eight scientific works and additional sources, comparison of four systems, technology alternatives, requirements, three diagrams, mockups and an evaluation plan are prepared. Fifteen tasks exist in YouTrack. User discussions and substantive supervisor feedback are unverified. No implemented application or measured accuracy is claimed. Both members and the supervisor must review the materials, add actual evidence, verify personal access, update PDFs and create the submission tag.
 
-## Материалы для последующих разделов формы
+## Materials for subsequent form sections
 YouTrack: https://frauddetect.youtrack.cloud/issues/DIP
-Доска: https://frauddetect.youtrack.cloud/agiles/204-1/218-1
-Единый отчёт: docs/Diploma_Report_Working.pdf
-Снимки доски и задач: management/YouTrack_Board_and_Tasks.pdf
+Board: https://frauddetect.youtrack.cloud/agiles/204-1/218-1
+Unified report: docs/Diploma_Report_Working.pdf
+Board and task screenshots: management/YouTrack_Board_and_Tasks.pdf
 
-Форма не отправлена. Доступ комиссии и руководителя ещё не проверен. Срок — 18:00 24 октября 2026 года. Один представитель сдаёт за всю команду.
+The form has not been submitted. Supervisor/commission access is not yet verified. Deadline: 18:00 on 24 October 2026. One representative submits for the whole team.

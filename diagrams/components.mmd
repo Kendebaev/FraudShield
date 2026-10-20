@@ -1,6 +1,6 @@
 flowchart LR
- C[React web / Telegram оболочка] -->|HTTPS JSON| A[Express API]
- A -->|REST JSON| M[FastAPI analyzer]
- A -->|История по согласию| D[(PostgreSQL)]
- M --> T[Текстовые признаки / модель]
- M --> U[Локальный разбор URL]
+ C[React web / Telegram wrapper] -->|HTTPS JSON| A[Express API]
+ A -->|REST JSON| M[FastAPI analyser]
+ A -->|Opt-in history| D[(PostgreSQL)]
+ M --> T[Text classifier / rules]
+ M --> U[Local URL structure analysis]

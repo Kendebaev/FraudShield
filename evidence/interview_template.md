@@ -1,18 +1,18 @@
-# Протокол реального пользовательского обсуждения
+# Actual user discussion record
 
-Статус: пустой бланк, не свидетельство проведённой беседы.
+Status: blank template, not evidence of a completed discussion.
 
-- Код участника:
-- Дата и формат:
-- Категория пользователя:
-- Подтверждение добровольного участия и согласованного использования обезличенных ответов:
-- Какой последний подозрительный случай был и как его проверяли:
-- Что было неудобно:
-- Готовность передавать текст и сохранять историю:
-- Предпочтительный язык и канал:
-- Результат задания на макете:
-- Дословный обезличенный ответ:
-- Наш вывод (отдельно от факта):
-- Изменённое требование и основание:
+- Participant code:
+- Date and format:
+- Audience category:
+- Voluntary participation and permission to use anonymised findings:
+- Most recent suspicious message and how it was checked:
+- Difficulties:
+- Willingness to paste text and privacy concerns:
+- Preferred language and channel:
+- Unassisted mockup task outcome:
+- Interpretation of the risk warning:
+- Actual quotations, anonymised:
+- Findings and requirement changes:
 
-Не записывать реквизиты, пароли, коды подтверждения и личную переписку. Требуется 3-5 реальных бесед либо содержательная договорённость с заказчиком.
+Do not record personal correspondence, passwords, verification codes or financial details. Complete 3-5 genuine records or document a client agreement.

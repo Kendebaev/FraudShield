@@ -1,3 +1,3 @@
-# Исходный код
+# Application source
 
-Реализация приложения пока не предоставлена. Не считать макеты и архитектуру работающей системой. Здесь размещать код после проверки командой.
+Implementation is not yet available. Do not present this folder as a working application. Add actual code under the authors' accounts.

@@ -1,3 +1,3 @@
-# Конфигурация
+# Configuration
 
-Добавить манифесты зависимостей, lock-файлы и .env.example по мере реализации. Никогда не коммитить реальные ключи и пароли.
+Add deployment settings, lock files and .env.example during implementation. Never commit secrets.

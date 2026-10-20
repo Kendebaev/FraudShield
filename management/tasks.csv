@@ -1,16 +1,16 @@
 ﻿ID,Summary,Responsible,Priority,Due Date,State,Acceptance Criteria
-DIP-1,Уточнить scope и обязательные требования,Кендебаев Н.А.,High,2026-10-21,Ревью,"Зафиксированы цель, границы и список Must; команда проверила формулировки."
-DIP-2,Провести 3-5 пользовательских обсуждений,Кендебаев Н.А.,High,2026-10-22,Очередь,"Есть согласия, обезличенные протоколы, выводы и ссылки на изменённые требования."
-DIP-3,Проверить научный обзор по полным текстам,Амирханов А.Н.,High,2026-10-22,Ревью,"Не менее 12 используемых источников, 8 научных; таблица ограничений и корректные ссылки."
-DIP-5,Проверить сравнение 4 аналогов,Амирханов А.Н.,High,2026-10-22,Ревью,8 критериев; источники и неизвестные функции обозначены; нет неподтверждённых преимуществ.
-DIP-4,Согласовать технологии и API,Кендебаев Н.А.,High,2026-10-22,Ревью,Выбраны технологии с альтернативами; контракт и модель ошибок проверены командой.
-DIP-6,Проверить требования и архитектуру,Кендебаев Н.А.,High,2026-10-22,Ревью,"Три диаграммы, исходники и экспорты согласованы с требованиями."
-DIP-7,Проверить UX и RU/KZ формулировки,Кендебаев Н.А.,Normal,2026-10-23,Очередь,Макеты основных сценариев и ошибки; KZ-тексты проверены носителем.
-DIP-8,Утвердить протокол данных и оценки,Амирханов А.Н.,High,2026-10-23,Очередь,"Разметка, групповой split, baseline, метрики и условия измерений зафиксированы."
-DIP-9,Получить содержательный отзыв руководителя,Кендебаев Н.А.,High,2026-10-23,Очередь,Руководитель оставил замечания; решения и изменения привязаны к версиям.
-DIP-10,Настроить репозиторий и доску задач,Кендебаев Н.А.,High,2026-10-21,Разработка,"Оба аккаунта, роли, задачи, критерии, доступы и ссылки проверены."
-DIP-11,Зафиксировать вклад каждого участника,Амирханов А.Н.,High,2026-10-23,Очередь,Каждый проверил свои материалы и внёс реальные изменения под собственным аккаунтом; review видим.
-DIP-12,Собрать финальный PDF и снимки доски,Кендебаев Н.А.,High,2026-10-24,Разработка,Ссылки доступны комиссии; скриншоты настоящей доски объединены; отчёт соответствует тегу prob-period-1.
-DIP-13,Разработать B0 и базовый корпус тестов,Амирханов А.Н.,Normal,2026-10-30,Очередь,"Детерминированные правила, модульные тесты, документация ограничений."
-DIP-14,Собрать API и добровольную историю,Кендебаев Н.А.,Normal,2026-11-06,Очередь,"Валидация, авторизация истории, удаление и интеграционные тесты."
-DIP-15,Сравнить B0 B1 B2 на локальном корпусе,Амирханов А.Н.,Normal,2026-11-13,Очередь,"Зафиксированный split; языковые метрики, CI, задержка и честный вывод."
+DIP-1,Clarify scope and mandatory requirements,N. A. Kendebaev,High,2026-10-21,Review,"Record aim, scope and Must requirements; team reviews wording."
+DIP-2,Conduct 3-5 user discussions,N. A. Kendebaev,High,2026-10-22,Backlog,"Record consent, anonymised notes, findings and links to requirement changes."
+DIP-3,Verify the full-text scientific review,A. N. Amirkhanov,High,2026-10-22,Review,"Use at least 12 sources, including 8 scientific works; provide limitations and accurate references."
+DIP-5,Verify the comparison of 4 systems,A. N. Amirkhanov,High,2026-10-22,Review,"Use 8 criteria; cite evidence, mark unknown features and avoid unsupported advantages."
+DIP-4,Agree technologies and API,N. A. Kendebaev,High,2026-10-22,Review,Compare technology alternatives; team reviews the contract and error model.
+DIP-6,Review requirements and architecture,N. A. Kendebaev,High,2026-10-22,Review,"Align three diagrams, editable sources and exports with requirements."
+DIP-7,Review UX and RU/KZ wording,N. A. Kendebaev,Normal,2026-10-23,Backlog,Cover main and error flows; a Kazakh speaker reviews Kazakh text.
+DIP-8,Approve data and evaluation protocol,A. N. Amirkhanov,High,2026-10-23,Backlog,"Document annotation, grouped splits, baselines, metrics and measurement conditions."
+DIP-9,Obtain substantive supervisor feedback,N. A. Kendebaev,High,2026-10-23,Backlog,Record actual comments and link decisions and changes to versions.
+DIP-10,Set up repository and task board,N. A. Kendebaev,High,2026-10-21,Develop,"Verify both accounts, roles, tasks, criteria, access and links."
+DIP-11,Document each member's contribution,A. N. Amirkhanov,High,2026-10-23,Backlog,Each member reviews their materials and makes genuine changes under their own account; review is visible.
+DIP-12,Assemble final PDF and board screenshots,N. A. Kendebaev,High,2026-10-24,Develop,Verify commission access; combine actual screenshots; align the report with the prob-period-1 tag.
+DIP-13,Implement B0 and a basic test corpus,A. N. Amirkhanov,Normal,2026-10-30,Backlog,"Provide deterministic rules, unit tests and documented limitations."
+DIP-14,Build API and opt-in history,N. A. Kendebaev,Normal,2026-11-06,Backlog,"Implement validation, history authorisation, deletion and integration tests."
+DIP-15,Compare B0 B1 B2 on the local corpus,A. N. Amirkhanov,Normal,2026-11-13,Backlog,"Use a fixed split; report language metrics, confidence intervals, latency and an honest conclusion."

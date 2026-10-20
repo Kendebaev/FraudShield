@@ -1,5 +1,5 @@
-# План проверки
+# Verification plan
 
-T1: длина и Unicode, пустой ввод, язык. T2: извлечение URL, IDN, userinfo, отсутствие сетевого доступа. T3: схема ответа и отказ анализатора. T4: согласие, авторизация, удаление, логи. T5: 1000 запросов, 10 клиентов, p50/p95/p99 и ошибки на фиксированном оборудовании. T6: B0/B1/B2, групповой split, F1/recall/FPR/CI отдельно RU/KZ. T7: 5 пользовательских заданий без подсказки.
+T1: input, Unicode, empty text, limits. T2: URL extraction, IDN, userinfo and no network requests. T3: response schema and unavailable service. T4: consent, authorisation, deletion and logs. T5: 1000 requests, 10 clients, p50/p95/p99 and errors on documented hardware. T6: B0/B1/B2, grouped split, F1/recall/FPR/CI separately for RU/KZ. T7: five unassisted voluntary user tasks.
 
-Это план; тесты реализации и эксперименты ещё не выполнены. Подробные критерии в разделах 6, 8 и 10 отчёта.
+This is a plan. No execution report or measured results exist yet. Criteria are detailed in report sections 6, 8 and 10.

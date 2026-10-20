@@ -4,7 +4,7 @@
     "author": "Cejas O. A., Guo Y., Tang Q.",
     "year": "2026",
     "title": "Large-Scale Multilingual SMS Fraud Detection For Telecom Networks",
-    "type": "NLPAICS, научная публикация",
+    "type": "NLPAICS, scientific publication",
     "url": "https://aclanthology.org/2026.nlpaics-1.7/"
   },
   {
@@ -12,7 +12,7 @@
     "author": "Ali F. D. M. A. et al.",
     "year": "2025",
     "title": "MOZ-Smishing: A Benchmark Dataset for Detecting Mobile Money Frauds",
-    "type": "AfricaNLP, научная публикация",
+    "type": "AfricaNLP, scientific publication",
     "url": "https://aclanthology.org/2025.africanlp-1.23/"
   },
   {
@@ -20,7 +20,7 @@
     "author": "Timko D., Rahman M. L.",
     "year": "2024",
     "title": "Smishing Dataset I: Phishing SMS Dataset from Smishtank.com",
-    "type": "CODASPY, научная публикация; авторская версия arXiv",
+    "type": "CODASPY, scientific publication; author version on arXiv",
     "url": "https://arxiv.org/abs/2402.18430"
   },
   {
@@ -28,7 +28,7 @@
     "author": "Nahapetyan A. et al.",
     "year": "2024",
     "title": "On SMS Phishing Tactics and Infrastructure",
-    "type": "IEEE S&P, научная публикация; материалы авторов",
+    "type": "IEEE S&P, scientific publication; authors' materials",
     "url": "https://github.com/wspr-ncsu/sms-phishing"
   },
   {
@@ -36,7 +36,7 @@
     "author": "Hosseinpour S., Das S.",
     "year": "2025",
     "title": "POSTER: A Multi-Signal Model for Detecting Evasive Smishing",
-    "type": "WiSec, научный постер; авторская версия arXiv",
+    "type": "WiSec, scientific poster; author version on arXiv",
     "url": "https://arxiv.org/abs/2505.18233"
   },
   {
@@ -44,7 +44,7 @@
     "author": "Islam M. R. et al.",
     "year": "2024",
     "title": "PhishGuard: A Convolutional Neural Network Based Model for Detecting Phishing URLs with Explainability Analysis",
-    "type": "Научный препринт arXiv",
+    "type": "Scientific preprint on arXiv",
     "url": "https://arxiv.org/abs/2404.17960"
   },
   {
@@ -52,7 +52,7 @@
     "author": "Togmanov M. et al.",
     "year": "2025",
     "title": "KazMMLU: Evaluating Language Models on Kazakh, Russian, and Regional Knowledge of Kazakhstan",
-    "type": "ACL, научная публикация",
+    "type": "ACL, scientific publication",
     "url": "https://aclanthology.org/2025.acl-long.701/"
   },
   {
@@ -60,7 +60,7 @@
     "author": "Conneau A. et al.",
     "year": "2020",
     "title": "Unsupervised Cross-lingual Representation Learning at Scale",
-    "type": "ACL, фундаментальная научная публикация",
+    "type": "ACL, foundational scientific publication",
     "url": "https://aclanthology.org/2020.acl-main.747/"
   },
   {
@@ -68,95 +68,95 @@
     "author": "UCI Machine Learning Repository",
     "year": "2012",
     "title": "SMS Spam Collection",
-    "type": "Датасет",
+    "type": "Dataset",
     "url": "https://archive.ics.uci.edu/dataset/228/sms+spam+collection"
   },
   {
     "id": "10",
-    "author": "Государственный портал Республики Казахстан",
+    "author": "Government portal of the Republic of Kazakhstan",
     "year": "2026",
-    "title": "Закон и порядок и защита цифровых прав граждан",
-    "type": "Официальные сведения о мошенничестве",
+    "title": "Law and order and protection of citizens' digital rights [translated title]",
+    "type": "Official information on fraud",
     "url": "https://www.gov.kz/org/aqmola-selinograd/press/news/details/1308837?lang=ru"
   },
   {
     "id": "11",
     "author": "Bitdefender",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "Scamio",
-    "type": "Официальное описание продукта",
+    "type": "Official product description",
     "url": "https://www.bitdefender.com/en-sg/consumer/scamio"
   },
   {
     "id": "12",
     "author": "Norton",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "FAQ: Norton Genie",
-    "type": "Официальная поддержка продукта",
+    "type": "Official product support",
     "url": "https://support.norton.com/sp/en/us/home/current/solutions/v20230717145233467"
   },
   {
     "id": "13",
     "author": "VirusTotal",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "How it works; Private Scanning",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://docs.virustotal.com/docs/how-it-works"
   },
   {
     "id": "14",
     "author": "Google",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "Safe Browsing",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://developers.google.com/safe-browsing"
   },
   {
     "id": "15",
     "author": "FastAPI",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "Features",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://fastapi.tiangolo.com/features/"
   },
   {
     "id": "16",
     "author": "Express",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "Express web framework",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://expressjs.com/"
   },
   {
     "id": "17",
     "author": "PostgreSQL",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "JSON Types",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://www.postgresql.org/docs/current/datatype-json.html"
   },
   {
     "id": "18",
     "author": "Telegram",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "Telegram Mini Apps",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://core.telegram.org/bots/webapps"
   },
   {
     "id": "19",
     "author": "scikit-learn",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "Text feature extraction",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction"
   },
   {
     "id": "20",
     "author": "Microsoft",
-    "year": "б. г.",
+    "year": "n.d.",
     "title": "ASP.NET Core APIs overview",
-    "type": "Официальная документация",
+    "type": "Official documentation",
     "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis?view=aspnetcore-10.0"
   }
 ]

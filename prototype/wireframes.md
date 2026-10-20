@@ -1,18 +1,18 @@
-# Макеты пользовательских сценариев
+# Interaction design specification
 
-Статус: проектные макеты, не реализованное приложение. См. раздел 9 отчёта.
+Status: design mockups, not an implemented application. See report section 9.
 
-## Экран проверки
-Заголовок, переключатель RU/KZ, назначение проверки, текстовое поле 1-5000 символов, кнопка «Проверить». История выключена по умолчанию. Во время запроса кнопка блокируется.
+## Checking screen
+Title, RU/KZ language selector, privacy note, 1-5000 character input and analyse button. History is off by default. Disable the button while a request is running.
 
-## Экран результата
-Текстовый уровень риска, список найденных признаков и рекомендаций, версия анализа. Цвет дублируется текстом. Отсутствие сигналов не означает гарантию безопасности. Сохранение доступно только после входа и явного согласия.
+## Result screen
+Text risk category, specific indicators and advice, and a new-check button. Colour is supplementary. Absence of indicators does not guarantee safety. Saving requires sign-in and separate consent.
 
-## Экран ошибки
-Сообщение «Не удалось проверить», возможность повтора. Не показывать зелёный статус или результат из предыдущего запроса.
+## Error screen
+Explain that analysis is unavailable and offer retry. Do not show a green checkmark or substitute a safe result after a service failure.
 
-## История
-Только свои записи, дата, результат, открытие и удаление. Текст хранится лишь при отдельном согласии. Предлагаемый срок 30 дней требует согласования.
+## History
+Show only the owner's records, date, result, details and deletion. Confirm deletion. The provisional 30-day retention period requires approval.
 
-## Проверка с пользователями
-Задания: вставить пример, объяснить результат своими словами, найти повтор после сбоя, удалить сохранённую запись. Зафиксировать ошибки и время. Реальные тесты ещё не проведены. KZ-переводы должны быть проверены носителем.
+## States and accessibility
+Cover empty input, length limit, long content, line breaks, timeout and repeated requests. Support keyboard use and focus. No user validation has occurred yet. A Kazakh speaker must review Kazakh wording.

@@ -1,375 +1,375 @@
 FraudShieldDevelopment of an Application for Detecting Phishing and Fraudulent Messages
 
-Материалы к первому апробационному периодуSoftware Engineering · SE-242820 октября 2026 года
+First probationary period submission materialsSoftware Engineering · SE-242820 October 2026
 
-КомандаКендебаев Нұрасыл АуесбекұлыАмирханов Асхат Нурланулы
+TeamNurassyl Auesbekuly KendebaevAskhat Nurlanuly Amirkhanov
 
-РуководительСерек Азамат ГалымжановичАссоциированный профессор
+SupervisorAzamat Galymzhanovich SerekAssociate Professor
 
-Проект предусматривает ручную проверку подозрительного текста и ссылок с объяснением признаков риска. На данном этапе представлены анализ предметной области, проектные требования, архитектура, макеты и план оценки.
+The project supports manual checking of suspicious text and links, with explanations of risk indicators. This submission presents domain analysis, requirements, architecture, mockups and an evaluation plan.
 
-Статус: рабочая версия для проверки командой и руководителем. Пользовательские интервью, подтверждённые результаты испытаний, замечания руководителя и ссылки на командные системы добавляются после получения фактических материалов. Раздел 11 содержит перечень недостающих подтверждений.
-
-
-# 1 Предложение проекта
-
-## Проблема и аудитория
-
-Пользователь получает сообщение от имени банка, службы доставки или государственного сервиса и должен решить, можно ли доверять просьбе, ссылке или требованию срочного действия. Предлагаемая система помогает оценить такое сообщение до перехода по ссылке. Основная аудитория - пользователи мобильных устройств в Казахстане, читающие сообщения на русском или казахском языке.
-
-## Цель
-
-Разработать и оценить прототип приложения, который принимает текст сообщения, выявляет признаки фишинга и мошенничества, проверяет структуру содержащихся ссылок и выдаёт понятное объяснение риска на выбранном языке интерфейса.
-
-## Задачи
-
-1. Изучить подходы к smishing и ограничения доступных датасетов.2. Проверить потребности пользователей и согласовать измеримые требования.3. Подготовить обезличенный корпус и правила разметки.4. Реализовать клиент, API, хранение истории по согласию и модуль анализа.5. Сравнить правила, простой текстовый классификатор и расширенный подход.6. Оценить точность, долю ложных тревог, задержку и понятность результата.
-
-## Границы
-
-В MVP входят ручная вставка текста, извлечение URL без перехода по ним, объяснение результата и добровольная история проверок. Канал доступа - мобильное веб-приложение; Telegram Mini App рассматривается как оболочка. Автоматическое чтение SMS и личных чатов, проверка звонков, OCR, блокировка платежей и гарантия безопасности сообщения в MVP не входят.
-
-## Инженерная сложность и ожидаемый результат
-
-Основные сложности - совместная обработка текста и URL, два языка и смешанные сообщения, согласованные контракты нескольких компонентов, защита приватности и воспроизводимая оценка на данных без утечки между выборками. Результат - интегрированный прототип, репозиторий, документация и отчёт с измеренными показателями. Превосходство над существующими продуктами не заявляется до испытаний.
+Status: working draft for team and supervisor review. User interviews, verified test results and substantive supervisor feedback require actual evidence. Section 11 lists the outstanding evidence.
 
 
-# 2 Актуальность и проверка потребностей
+# 1 Project proposal
 
-Государственные материалы Казахстана описывают фишинг, поддельные сайты и мошенничество в мессенджерах как актуальные схемы [10]. Это подтверждает существование проблемы, но само по себе не доказывает спрос на конкретное приложение. Научные работы показывают значимость локального языка, контекста и данных [1, 2, 7].
+## Problem and target audience
 
-| ID | Положение | Основание и статус |
+A user receives a message claiming to come from a bank, delivery company or public service and must decide whether to trust its request, link or demand for urgent action. The proposed system helps assess the message before opening a link. The primary audience is mobile device users in Kazakhstan who read messages in Russian or Kazakh.
+
+## Aim
+
+Develop and evaluate an application prototype that accepts message text, identifies phishing and fraud indicators, examines the structure of embedded links and explains the risk in the selected interface language.
+
+## Objectives
+
+1. Study smishing detection approaches and limitations of available datasets.2. Validate user needs and agree measurable requirements.3. Prepare an anonymised corpus and annotation guidelines.4. Implement the client, API, opt-in history and analysis module.5. Compare rules, a simple text classifier and an extended approach.6. Evaluate detection quality, false alarms, latency and explanation clarity.
+
+## Scope
+
+The MVP includes manual text entry, URL extraction without visiting links, explanations and optional check history. The main channel is a mobile web application; a Telegram Mini App is considered as a wrapper. Automatic access to SMS or private chats, call analysis, OCR, payment blocking and guarantees of message safety are outside the MVP.
+
+## Engineering challenges and expected outcome
+
+Challenges include combining text and URL analysis, handling two languages and mixed messages, maintaining component contracts, protecting privacy and evaluating reproducibly without data leakage. Expected outputs are an integrated prototype, repository, documentation and a report with measured results. Superiority over existing products is not claimed before testing.
+
+
+# 2 Relevance and user needs validation
+
+Official Kazakhstan materials describe phishing, fake websites and messenger fraud as current threats [10]. This establishes the problem, but does not by itself demonstrate demand for this application. Research highlights the importance of local language, context and data [1, 2, 7].
+
+| ID | Statement | Evidence and status |
 | --- | --- | --- |
-| E1 | Фишинг и сообщения от имени сервисов - актуальная проблема | Подтверждено официальным источником [10]. |
-| E2 | Локальные данные важны для оценки | Следует из исследований [1, 2, 7]; применимость к нашему корпусу проверяется. |
-| H1 | Пользователь готов вставлять сообщения вручную | Гипотеза. Проверить в интервью и задании на макете. |
-| H2 | Объяснение полезнее одного цветного индикатора | Гипотеза. Проверить понимание результата. |
-| H3 | Telegram удобнее отдельного приложения | Гипотеза. Проверить предпочитаемый канал. |
-| H4 | История проверок нужна большинству | Гипотеза. Уточнить пользу и готовность сохранять текст. |
+| E1 | Phishing and service impersonation are current problems | Supported by official source [10]. |
+| E2 | Local data matters for evaluation | Supported by research [1, 2, 7]; applicability to our corpus must be evaluated. |
+| H1 | Users will manually paste messages | Hypothesis: validate in discussions and a mockup task. |
+| H2 | An explanation is more useful than colour alone | Hypothesis: assess understanding of the result. |
+| H3 | Telegram is preferable to a separate app | Hypothesis: ask about the preferred channel. |
+| H4 | Most users need check history | Hypothesis: assess usefulness and willingness to store text. |
 
-## План обсуждений с пользователями
+## User discussion plan
 
-До фиксации требований провести 3-5 бесед с представителями аудитории: студент, работающий пользователь банковских приложений, взрослый пользователь с небольшим цифровым опытом; при возможности - специалист поддержки. Участие добровольное. Не собирать пароли, коды подтверждения, реквизиты и необезличенную переписку.
+Before freezing requirements, conduct 3-5 discussions with audience representatives: a student, a working banking-app user, an adult with limited digital experience and, if available, a support specialist. Participation is voluntary. Do not collect passwords, verification codes, financial details or identifiable private correspondence.
 
-Вопросы: какой подозрительный случай был последним; как проверяли; что было неудобно; что готовы передавать сервису; какой язык и канал предпочитают; что означает для них результат «признаки риска не обнаружены»; какие действия выполнят после предупреждения. Завершить заданием на макете без подсказки.
+Ask about the most recent suspicious message, how it was checked, difficulties, willingness to share data, preferred language and channel, interpretation of "no clear risk indicators detected" and actions after a warning. Finish with an unassisted mockup task.
 
-Для каждой беседы зафиксировать дату, обезличенный код участника, категорию аудитории, согласие, фактический ответ, вывод и связанное требование. Протокол хранится в evidence/. Изменения требований фиксируются отдельным решением. Фактических записей бесед в переданных материалах нет; этот пункт пока не закрыт.
+For each discussion, record the date, anonymised participant code, audience category, consent, actual responses, findings and related requirements. Store records in evidence/. Record requirement changes as decisions. No actual discussion records were supplied; this item remains outstanding.
 
 
-# 3 Обзор научных источников
+# 3 Scientific literature review
 
-В обзор включены восемь научных работ [1-8], преимущественно 2024-2026 годов; XLM-R [8] сохранён как фундаментальная работа. Проверены полные тексты: постановка задачи, данные, методы оценки и ограничения. Статус научного постера и препринта указан отдельно. Эксперименты авторов в рамках данного этапа не воспроизводились; выводы для FraudShield являются проектными решениями, а не измеренными результатами.
+The review covers eight scientific works [1-8], mainly from 2024-2026; XLM-R [8] is retained as foundational research. Full texts were examined for problem definition, data, evaluation and limitations. Posters and preprints are explicitly labelled. Published experiments were not reproduced at this stage; implications for FraudShield are design decisions rather than measured results.
 
-| Источник | Подход и полезный результат | Ограничение и решение для проекта |
+| Source | Approach and useful findings | Limitation and project implication |
 | --- | --- | --- |
-| [1] Cejas et al., 2026 | Многоязычные эмбеддинги для HAM, SPAM и SMISHING; локальный запуск с оценкой задержки и памяти. | Закрытый корпус; авторы не приводят метрики по отдельным языкам и не оценивают concept drift. Нужны языковые и временные срезы. |
-| [2] Ali et al., 2025 | Краудсорсинг локальных сообщений; LLM в zero/few-shot режимах, F1 по классам и macro-F1. | Мозамбик и португальский; статический временной срез. Перенять протокол локального сбора, не переносить показатели на Казахстан. |
-| [3] Timko, Rahman, 2024 | SmishTank: пользовательские smishing-примеры, бренды, домены и репутация в момент сбора. | Состав зависит от версии; фишинговый корпус не заменяет законные сообщения. Фиксировать снимок, дату и происхождение метки. |
-| [4] Nahapetyan et al., 2024 | Исследование тактик и инфраструктуры; авторы публикуют сообщения и группировку кампаний. | Схожие кампании могут попасть в разные выборки. Разделять группы шаблонов и доменов при оценке. |
+| [1] Cejas et al., 2026 | Multilingual embeddings for HAM, SPAM and SMISHING; local execution with latency and memory evaluation. | Private corpus; no per-language metrics or concept-drift evaluation. Evaluate language and temporal slices. |
+| [2] Ali et al., 2025 | Crowdsourced local messages; zero/few-shot LLMs, per-class F1 and macro-F1. | Mozambique and Portuguese; a static time slice. Adapt the collection protocol, not the reported performance, to Kazakhstan. |
+| [3] Timko, Rahman, 2024 | SmishTank: user-submitted smishing examples, brands, domains and reputation at collection time. | Contents vary by version; a phishing corpus does not supply legitimate examples. Record snapshot, date and label provenance. |
+| [4] Nahapetyan et al., 2024 | Study of tactics and infrastructure; published messages and campaign groupings. | Similar campaigns can leak across splits. Group templates and domains during evaluation. |
 
-Вывод: корпус должен отражать не только ключевые слова, но и источник, язык, дату, кампанию и способ получения метки. Публикации про иностранные сообщения дают методическую основу, но не подтверждают качество на русских и казахских сообщениях.
+The corpus must record source, language, date, campaign and label provenance as well as text. Foreign-language studies provide methodological guidance, but do not establish performance on Russian and Kazakh messages.
 
 
-# 3 Обзор научных источников продолжение
+# 3 Scientific literature review continued
 
-| Источник | Подход и полезный результат | Ограничение и решение для проекта |
+| Source | Approach and useful findings | Limitation and project implication |
 | --- | --- | --- |
-| [5] Hosseinpour, Das, 2025 | Четыре потока признаков: региональные сущности, структура, CharCNN и контекст; сравнение с отдельными потоками. | Короткий постер; часть spam размечена как smishing по словам, возможна зависимость от правил меток. Нужны независимая разметка и абляция. |
-| [6] Islam et al., 2024 | 21 извлекаемый признак URL и CNN; объяснение вклада признаков. | URL-классификация не покрывает сообщения без ссылок. Высокая accuracy на авторском split не доказывает перенос на новые кампании. |
-| [7] Togmanov et al., 2025 | KazMMLU оценивает казахский, русский и региональные знания; показывает ограничения моделей. | Задания на знания не являются детекцией фишинга. Использовать как аргумент для языковой оценки, а не как обучающий корпус мошенничества. |
-| [8] Conneau et al., 2020 | XLM-R: многоязычное предобучение, перенос и компромисс между числом языков и ёмкостью модели. | Общие NLP-бенчмарки не гарантируют детекцию мошенничества. Измерять качество и ресурсы против TF-IDF на одном split. |
+| [5] Hosseinpour, Das, 2025 | Four feature streams: regional entities, structure, CharCNN and context; comparison with individual streams. | Short poster; some spam is labelled smishing using keywords, risking dependence on label rules. Use independent annotation and ablations. |
+| [6] Islam et al., 2024 | 21 extracted URL features and a CNN; explanation of feature contributions. | URL classification omits messages without links. High accuracy on the authors' split does not establish generalisation to new campaigns. |
+| [7] Togmanov et al., 2025 | KazMMLU evaluates Kazakh, Russian and regional knowledge, showing model limitations. | Knowledge questions are not phishing detection. Use it to motivate language evaluation, not as fraud training data. |
+| [8] Conneau et al., 2020 | XLM-R: multilingual pretraining, transfer and the trade-off between language coverage and model capacity. | General NLP benchmarks do not guarantee fraud detection. Compare quality and resources against TF-IDF on the same split. |
 
-## Синтез и исследовательский вопрос
+## Synthesis and research question
 
-Вопрос проекта: даёт ли совместный анализ текста и структуры URL практически полезное качество обнаружения мошенничества на локальном RU/KZ-корпусе при приемлемой доле ложных тревог и времени ответа? Сравнение проводится с правилами и простым текстовым классификатором; отсутствие улучшения также является допустимым исследовательским результатом.
+Does combined text and URL-structure analysis provide practically useful fraud detection on a local RU/KZ corpus at an acceptable false-positive rate and response time? Compare it with rules and a simple text classifier. Finding no improvement is also a valid research result.
 
-Планируемая практическая особенность - локальные примеры, два языка и понятное объяснение признаков. Заявлять научную уникальность лишь на основании этих признаков нельзя: многоязычные и локально адаптированные подходы уже существуют [1, 2, 5].
+The intended practical focus is local examples, two languages and understandable explanations. These features alone do not establish scientific novelty: multilingual and locally adapted approaches already exist [1, 2, 5].
 
-## Дополнительные источники
+## Additional sources
 
-UCI SMS Spam Collection [9] пригоден для воспроизводимого базового эксперимента, но spam/ham не тождественны fraud/legitimate. Документация продуктов [11-14] используется для сравнения аналогов, документация технологий [15-20] - для архитектурных решений. Полные ссылки приведены в конце отчёта.
+UCI SMS Spam Collection [9] supports a reproducible baseline, but spam/ham is not equivalent to fraud/legitimate. Product documentation [11-14] supports the system comparison; technology documentation [15-20] supports architecture decisions. Full references appear at the end.
 
 
-# 4 Сравнение существующих систем
+# 4 Comparison of existing systems
 
-Сравниваются четыре системы по восьми одинаковым критериям. Сведения взяты из официальных описаний [11-14], дата проверки - 20.10.2026. «Не подтверждено» означает отсутствие доказательства в изученном источнике, а не отсутствие функции. Практическая проверка продуктов на локальном корпусе пока не проведена.
+Four systems are compared against eight common criteria using official descriptions [11-14], checked on 20 October 2026. "Not verified" means no supporting evidence was found in the reviewed source; it does not establish that a feature is absent. Products have not yet been tested on a local corpus.
 
-| Критерий | Scamio [11] | Norton Genie [12] | VirusTotal [13] | Safe Browsing [14] |
+| Criterion | Scamio [11] | Norton Genie [12] | VirusTotal [13] | Safe Browsing [14] |
 | --- | --- | --- | --- | --- |
-| Полный текст сообщения | Да | Да | Не основной объект сервиса | Нет, сервис про URL |
-| URL | Да | Да | Да | Да |
-| Изображение / скриншот | Да | Да | Не подтверждено для объяснения сообщений | Не относится к текстовой задаче |
-| Объяснение пользователю | Заявлен анализ и рекомендации | Да, объясняет признаки | Отчёты движков и репутации | Статус опасности URL |
-| RU/KZ качество на локальных схемах | Не подтверждено | Не подтверждено | Не подтверждено | Не оценивает смысл текста |
-| API для нашего приложения | Не подтверждено | Не подтверждено | Есть API; условия проверить | Есть API; ограничения использования |
-| Локальный запуск обработки | Не подтверждено | Не подтверждено | Облачный сервис | Облачная проверка |
-| Роль в сравнении | Прямой функциональный аналог | Прямой функциональный аналог | Аналог URL-компонента | Аналог URL-компонента |
+| Full message text | Yes | Yes | Not the service's primary input | No; URL-focused service |
+| URL | Yes | Yes | Yes | Yes |
+| Image / screenshot | Yes | Yes | Not verified for message explanation | Not applicable to text analysis |
+| User explanation | Analysis and advice described | Yes; explains indicators | Engine and reputation reports | URL threat status |
+| RU/KZ quality on local scams | Not verified | Not verified | Not verified | Does not assess text meaning |
+| API for our application | Not verified | Not verified | API available; verify terms | API available; usage restrictions |
+| Local processing deployment | Not verified | Not verified | Cloud service | Cloud checking |
+| Comparison role | Direct functional alternative | Direct functional alternative | URL-component alternative | URL-component alternative |
 
-## Зачем разрабатывать своё решение
+## Rationale for building FraudShield
 
-Scamio и Genie уже решают похожую пользовательскую задачу. Основание для диплома - разработка и измеримая оценка собственной системы с контролируемым корпусом, RU/KZ-сценариями, политикой хранения и воспроизводимым базовым сравнением. Преимущество в точности, языке или приватности нужно доказать; оно не предполагается автоматически.
+Scamio and Genie already address similar user needs. The diploma focuses on engineering and evaluating an independently developed system with a controlled corpus, RU/KZ scenarios, an explicit storage policy and reproducible baselines. Any accuracy, language or privacy advantage must be demonstrated.
 
-Для внешних URL-сервисов перед внедрением проверить тарифы, условия использования, передачу данных и ограничения API. В MVP допустима локальная проверка структуры URL без отправки исходного текста третьим сторонам. Отсутствие URL в репутационной базе не означает безопасность.
+Before integrating external URL services, verify pricing, terms, data transfers and API restrictions. The MVP can analyse URL structure locally without sending message text to third parties. Absence from a reputation database does not establish safety.
 
 
-# 5 Выбор технологий
+# 5 Technology selection
 
-Ниже приведены предварительные решения для обсуждения с командой. Финальный стек фиксируется после проверки компетенций и короткого технического прототипа. Разделение обязанностей соответствует представленным обоснованиям проекта.
+These are provisional decisions for team discussion. Finalise the stack after reviewing team skills and a short technical prototype. Planned responsibilities follow the supplied project proposals.
 
-| Решение | Альтернативы | Предлагаемый выбор и основание |
+| Decision | Alternatives | Proposed choice and rationale |
 | --- | --- | --- |
-| Серверный API | Node.js + Express; Python + FastAPI; ASP.NET Core | Express для пользовательского API и FastAPI для анализа: соответствует ролям и Python-экосистеме. Цена - два сервиса. Если сопровождение сложно, объединить API в FastAPI [15,16,20]. |
-| Хранилище | PostgreSQL; SQLite; MongoDB | PostgreSQL: связи пользователей, проверок, версий и отзывов; JSONB для объяснений [17]. SQLite проще локально, MongoDB удобна для документов, но не даёт преимущества для принятой модели связей. |
-| Клиентский канал | Мобильный web / React; Telegram Mini App; нативное приложение | Адаптивный web как основной клиент; Telegram Mini App как оболочка [18]. Не требуется установка приложения; Telegram-вход и ограничения платформы должны проверяться отдельно. |
-| Анализ текста | Правила; TF-IDF + логистическая регрессия; многоязычный encoder | Правила как B0, TF-IDF как B1 [19], encoder как кандидат B2 [1,8]. Выбор B2 только по измерениям. Внешняя LLM - отдельный эксперимент с согласием и проверкой стоимости. |
-| Связь компонентов | REST/JSON; gRPC; очередь задач | REST/JSON: простая отладка и проверка контрактов, достаточно для ручных запросов MVP. gRPC полезен при более жёстких требованиях, очередь - для долгих асинхронных задач. |
+| Server API | Node.js + Express; Python + FastAPI; ASP.NET Core | Express for the user API and FastAPI for analysis fit the roles and Python ecosystem. Trade-off: two services. Consolidate in FastAPI if maintenance becomes difficult [15,16,20]. |
+| Storage | PostgreSQL; SQLite; MongoDB | PostgreSQL supports user, check, version and feedback relationships; JSONB stores explanations [17]. SQLite is simpler locally; MongoDB suits documents but offers no clear advantage for this relational model. |
+| Client channel | Mobile web / React; Telegram Mini App; native app | Responsive web as the main client; Telegram Mini App as a wrapper [18]. No app installation is required; evaluate Telegram authentication and platform constraints separately. |
+| Text analysis | Rules; TF-IDF + logistic regression; multilingual encoder | Rules as B0, TF-IDF as B1 [19], encoder as candidate B2 [1,8]. Choose B2 based on measurements. An external LLM requires a separate consent and cost experiment. |
+| Component communication | REST/JSON; gRPC; task queue | REST/JSON offers straightforward debugging and contract checks for manual MVP requests. gRPC fits stricter requirements; a queue fits long-running asynchronous jobs. |
 
-## Критерии пересмотра
+## Reconsideration criteria
 
-Оценивать трудоёмкость интеграции, воспроизводимость сборки, задержку, стоимость и возможность не передавать личный текст внешним сервисам. Если два серверных стека не дают пользы, упростить архитектуру до одного API. Next.js не обязателен: для формы проверки SEO и серверный рендеринг не являются главными требованиями.
+Assess integration effort, reproducible builds, latency, cost and the ability to keep private text out of external services. If two server stacks add little value, consolidate the API. Next.js is optional: SEO and server rendering are not primary requirements for the checking form.
 
 
-# 6 Функциональные требования
+# 6 Functional requirements
 
-Приоритеты: Must - обязательное для MVP; Should - следующий приоритет. Требования предварительные до пользовательских бесед и согласования руководителем. Критерии приёмки описывают будущую проверку, а не уже пройденные испытания.
+Must means required for the MVP; Should indicates the next priority. Requirements remain provisional until user discussions and supervisor approval. Acceptance criteria describe future checks, not completed tests.
 
-| ID | Приоритет | Требование | Критерий приёмки |
+| ID | Priority | Requirement | Acceptance criterion |
 | --- | --- | --- | --- |
-| FR1 | Must | Вставка текста RU/KZ, 1-5000 символов | Пустой ввод и превышение лимита отклоняются; валидные Unicode-строки принимаются. |
-| FR2 | Must | Извлечение и разбор ссылок | Все URL контрольного набора извлекаются; автоматического открытия и загрузки сайтов нет. |
-| FR3 | Must | Результат анализа | Возвращаются risk_level, reasons, model_version и status. При сбое status=unavailable, без зелёного результата. |
-| FR4 | Must | Понятное объяснение | Каждый найденный сигнал имеет описание и рекомендацию; отсутствие сигналов не названо гарантией безопасности. |
-| FR5 | Must | Выбор RU/KZ интерфейса | Ввод, результат, ошибки и подсказки отображаются на выбранном языке; исходный текст не переводится молча. |
-| FR6 | Must | История по явному согласию | По умолчанию текст не сохраняется. При согласии запись доступна только владельцу. |
-| FR7 | Must | Удаление сохранённой проверки | Владелец удаляет запись; повторное чтение возвращает 404; чужой доступ запрещён. |
-| FR8 | Should | Обратная связь о результате | Отзыв хранится отдельно от экспертной метки и не попадает автоматически в обучение. |
-| FR9 | Must | Контроль версий анализа | Для сохранённого результата доступны версия алгоритма, время и версия схемы ответа. |
-| FR10 | Should | Telegram-оболочка | При включении Mini App сервер проверяет подпись initData; поддельные и устаревшие данные отклоняются. |
+| FR1 | Must | RU/KZ text input, 1-5000 characters | Reject empty and over-limit input; accept valid Unicode strings. |
+| FR2 | Must | Extract and parse links | Extract all URLs in the control set without automatically visiting or downloading sites. |
+| FR3 | Must | Analysis result | Return risk_level, reasons, model_version and status. A failure returns status=unavailable, without a green result. |
+| FR4 | Must | Understandable explanation | Each detected signal has an explanation and advice; absence of signals is not a safety guarantee. |
+| FR5 | Must | RU/KZ interface selection | Display input controls, results, errors and guidance in the selected language; do not silently translate the original text. |
+| FR6 | Must | History with explicit consent | Do not store text by default. Consented records are available only to their owner. |
+| FR7 | Must | Delete a saved check | The owner can delete a record; subsequent reads return 404; prohibit access by other users. |
+| FR8 | Should | Result feedback | Keep feedback separate from expert labels; do not automatically add it to training data. |
+| FR9 | Must | Analysis version tracking | Saved results include algorithm version, timestamp and response schema version. |
+| FR10 | Should | Telegram wrapper | If enabled, verify initData signatures server-side; reject forged or expired data. |
 
 
-# 6 Нефункциональные требования
+# 6 Non-functional requirements
 
-| ID | Приоритет | Показатель | Условия и приёмка |
+| ID | Priority | Measure | Conditions and acceptance |
 | --- | --- | --- | --- |
-| NFR1 | Must | Локальный анализ p95 ≤ 2 с | 1000 запросов после прогрева, 10 одновременных клиентов, вход 100-2000 символов; зафиксировать CPU/RAM и версии. Измерение ещё не выполнено. |
-| NFR2 | Must | Тайм-аут ≤ 5 с | При превышении лимита UI показывает недоступность и повтор; результат не подменяется безопасным. |
-| NFR3 | Must | Минимизация данных | Не сохранять исходный текст без согласия, исключить его из логов. Проверить журнал и БД на контрольных строках. |
-| NFR4 | Must | Изоляция пользователей | Проверки API для чтения/удаления чужой истории отклоняются; секреты хранятся вне репозитория. |
-| NFR5 | Must | Воспроизводимость | Чистая установка по lock-файлам и запуск тестов по README; версии модели и split-манифест записаны. |
-| NFR6 | Must | Оценка качества по языкам | Отдельные precision, recall, F1 и confusion matrix для RU и KZ; смешанные сообщения выделены отдельно. |
-| NFR7 | Should | Понятность интерфейса | 4 из 5 участников выполняют проверку без подсказки; фиксировать фактическое число и замечания, не обобщать на население. |
+| NFR1 | Must | Local analysis p95 ≤ 2 s | 1000 requests after warm-up, 10 concurrent clients, 100-2000 characters; record CPU/RAM and versions. Not measured yet. |
+| NFR2 | Must | Timeout ≤ 5 s | After timeout, display unavailability and retry; never substitute a safe result. |
+| NFR3 | Must | Data minimisation | Do not store raw text without consent or write it to logs. Inspect logs and database using control strings. |
+| NFR4 | Must | User isolation | Reject API reads/deletions of another user's history; keep secrets outside the repository. |
+| NFR5 | Must | Reproducibility | Clean installation from lock files and README test commands; record model versions and split manifest. |
+| NFR6 | Must | Quality by language | Report precision, recall, F1 and confusion matrices separately for RU and KZ; identify mixed-language messages. |
+| NFR7 | Should | Interface clarity | 4 of 5 participants complete a check unassisted; report actual counts and comments without population-wide generalisation. |
 
-## Политика результата
+## Result wording policy
 
-Внутренние категории: high, suspicious, low_signal. В интерфейсе: «Высокий риск», «Есть подозрительные признаки», «Явные признаки риска не обнаружены». Сбой обозначается отдельно. Термин «безопасно» из первоначальной идеи заменён на осторожную формулировку, поскольку ошибки классификации неизбежны. Числовая вероятность не выводится, пока калибровка не проверена.
-
-
-# 7 Архитектура и сценарии
-
-## Контекст системы
-
-Пользователь вручную передаёт текст и получает оценку. Команда управляет версиями корпуса и модели. Внешняя репутационная проверка URL - расширение; по умолчанию анализ выполняется без перехода по ссылке. Архитектура не требует доступа к чужим чатам или SMS.
-
-## Основной сценарий UC1
-
-Пользователь вставляет сообщение → интерфейс проверяет длину → API валидирует запрос → анализатор нормализует текст и извлекает URL → объединяет сигналы → возвращает объяснение → интерфейс показывает результат. Сохранение выполняется только при согласии и наличии аутентифицированного владельца. При тайм-ауте возвращается ошибка доступности.
+Internal categories are high, suspicious and low_signal. User-facing labels are "High risk", "Suspicious indicators" and "No clear risk indicators detected". Service failures have a separate state. The original "safe" label is replaced because classification errors are unavoidable. Do not display numerical probabilities until calibration has been validated.
 
 
-# 7 Диаграмма вариантов использования
+# 7 Architecture and use cases
 
-| Сценарий | Предусловие | Успех / исключение |
+## System context
+
+Users submit text manually and receive an assessment. The team manages corpus and model versions. External URL reputation checks are optional; the default analysis does not visit links. The architecture requires no access to private chats or SMS.
+
+## Main flow UC1
+
+The user pastes a message → the interface checks length → the API validates the request → the analyser normalises text and extracts URLs → signals are combined → an explanation is returned → the interface displays the result. Saving requires consent and an authenticated owner. A timeout produces an availability error.
+
+
+# 7 Use case diagram
+
+| Use case | Precondition | Success / exception |
 | --- | --- | --- |
-| UC1 Проверка | Текст допустимой длины | FR1-3. Результат либо явная ошибка без оценки безопасности. |
-| UC2 Объяснение | Проверка завершена | FR4-5. Пользователь видит признаки и следующие действия. |
-| UC3 Сохранение | Вход и явное согласие | FR6, FR9. Запись принадлежит текущему пользователю. |
-| UC4 История и удаление | Пользователь вошёл | FR7. Чужие записи недоступны; удалённая запись не читается. |
+| UC1 Check | Text within length limits | FR1-3. A result or explicit error without a safety assessment. |
+| UC2 Explanation | Completed analysis | FR4-5. The user sees indicators and next steps. |
+| UC3 Save | Sign-in and explicit consent | FR6, FR9. The record belongs to the current user. |
+| UC4 History and deletion | Signed-in user | FR7. Other users' records are inaccessible; deleted records cannot be read. |
 
-Обратная связь FR8 является необязательным отдельным действием после результата. Telegram-вход FR10 применяется только при включении оболочки. Общий анонимный сценарий проверки не зависит от Telegram.
+Feedback FR8 is an optional action after a result. Telegram authentication FR10 applies only when the wrapper is enabled. Anonymous checks do not depend on Telegram.
 
 
-# 7 Компоненты и данные
+# 7 Components and data
 
-| Сущность | Назначение и основные поля |
+| Entity | Purpose and main fields |
 | --- | --- |
-| User | id, auth_provider, provider_subject; не хранить лишние данные профиля. |
-| Check | id, user_id, created_at, risk_level, reasons_json, model_version, retention_until; текст только по отдельному согласию. |
-| Feedback | id, check_id, user_id, verdict, comment; пользовательское мнение отделено от разметки. |
+| User | id, auth_provider, provider_subject; avoid unnecessary profile data. |
+| Check | id, user_id, created_at, risk_level, reasons_json, model_version, retention_until; store text only with separate consent. |
+| Feedback | id, check_id, user_id, verdict, comment; keep user opinions separate from expert labels. |
 | DatasetItem | id, sanitized_text, language, label, source, source_date, consent_or_license, campaign_group, split, annotation_version. |
 
-Анонимная проверка не создаёт историю в БД. Нужен явный срок хранения; предварительно 30 дней для добровольной истории с возможностью немедленного удаления. Перед реализацией срок согласовать с командой и руководителем.
+Anonymous checks do not create database history. A retention period must be explicit; the provisional proposal is 30 days for opt-in history with immediate deletion available. Agree this period with the team and supervisor before implementation.
 
 
-# 8 Контракты и трассируемость
+# 8 Contracts and traceability
 
-## Черновой контракт API
+## Draft API contract
 
-POST /api/v1/checks/analyzeЗапрос: text (1-5000 символов), language (ru/kk/auto). Для анонимной проверки текст не сохраняется.Ответ 200: request_id, status=completed, risk_level, reasons[], urls[], model_version, processing_ms. Объяснения имеют code и description.Ответы 422: неверный ввод; 429: превышение частоты; 503: анализ недоступен. Сбой не имеет risk_level=low_signal.
+POST /api/v1/checks/analyzeRequest: text (1-5000 characters), language (ru/kk/auto). Anonymous message text is not stored.Response 200: request_id, status=completed, risk_level, reasons[], urls[], model_version, processing_ms. Reasons contain code and description.Errors: 422 invalid input; 429 rate limit exceeded; 503 analysis unavailable. A failure must not return risk_level=low_signal.
 
-POST /api/v1/history: сохранить результат с явным согласием, только для вошедшего пользователя.GET /api/v1/history: история текущего владельца.DELETE /api/v1/history/{id}: удаление своей записи.POST /api/v1/feedback: необязательный отзыв; не изменяет эталонную метку автоматически.
+POST /api/v1/history: save a result with explicit consent for an authenticated user.GET /api/v1/history: current owner's history.DELETE /api/v1/history/{id}: delete an owned record.POST /api/v1/feedback: optional feedback; does not automatically change the reference label.
 
-## Связь требований, компонентов и проверок
+## Requirements, components and verification
 
-| Требование | Компонент | Проверка |
+| Requirement | Component | Verification |
 | --- | --- | --- |
-| FR1, FR5 | Web + API | T1: пустой ввод, границы длины, Unicode, смена языка. |
-| FR2 | URL analyzer | T2: URL без схемы, IDN, IP, userinfo, некорректный адрес; без сетевых запросов. |
-| FR3, FR4, FR9 | Analyzer + UI | T3: схема ответа, версия, причины, ошибка сервиса. |
-| FR6, FR7, NFR3-4 | Auth + API + PostgreSQL | T4: согласие, чужая запись, удаление, отсутствие текста в логах. |
-| NFR1-2 | API + Analyzer | T5: нагрузка и тайм-аут на зафиксированной машине. |
-| NFR6 | Data pipeline + evaluator | T6: фиксированное разделение, метрики отдельно RU/KZ и по классам. |
-| NFR7 | Web prototype | T7: задания с 5 пользователями и протокол ошибок. |
+| FR1, FR5 | Web + API | T1: empty input, length boundaries, Unicode, language switching. |
+| FR2 | URL analyzer | T2: scheme-less URLs, IDN, IP, userinfo and malformed addresses; no network requests. |
+| FR3, FR4, FR9 | Analyzer + UI | T3: response schema, version, reasons and service failure. |
+| FR6, FR7, NFR3-4 | Auth + API + PostgreSQL | T4: consent, another user's record, deletion and no text in logs. |
+| NFR1-2 | API + Analyzer | T5: load and timeout on documented hardware. |
+| NFR6 | Data pipeline + evaluator | T6: fixed split; metrics by RU/KZ and class. |
+| NFR7 | Web prototype | T7: tasks with 5 users and an error record. |
 
 
-# 9 UX и макеты
+# 9 UX and mockups
 
-## Ключевые взаимодействия
+## Key interactions
 
-Первый экран объясняет назначение сервиса, лимит ввода и отсутствие автоматического сохранения. Кнопка проверки блокируется при пустом вводе и во время запроса. Результат содержит текстовую категорию, конкретные признаки и понятную рекомендацию; цвет используется только как дополнительный сигнал.
+The first screen explains the purpose, input limit and absence of automatic storage. Disable checking for empty input and while a request is running. Results contain a text category, specific indicators and practical advice; colour is only a supplementary cue.
 
-В состоянии «признаки риска не обнаружены» остаётся пояснение: «Это не гарантирует безопасность. Проверьте отправителя через официальный канал». Экран ошибки не использует зелёную отметку. Сохранение и удаление истории показываются только после входа; согласие на историю не заменяет согласие на использование сообщения в исследовании.
+The low-signal state retains: "This does not guarantee safety. Verify the sender through an official channel." Error screens do not show a green checkmark. History controls appear after sign-in; consent to history storage does not imply consent to research use.
 
-Макеты иллюстрируют UC1-2 и состояние сбоя. Экраны истории, KZ-локализация и Telegram-вход должны пройти отдельную проверку. Редактируемая спецификация макетов находится в prototype/wireframes.md. Реальные пользовательские тесты пока не проведены.
-
-
-# 10 Проверка качества и данные
-
-## Сбор и разметка
-
-Предлагаемый пилот: 600 обезличенных сообщений, по 300 для RU и KZ; дополнительно учитывать смешанный язык. Целевой минимум для каждого языка - 100 мошеннических и 100 законных сообщений. Это план сбора, а не объём уже имеющихся данных. При недостатке данных сократить выводы и явно указать размер, не заменять реальные проверки синтетическими.
-
-Источники: добровольные обезличенные примеры с согласованным использованием; открытые корпуса с проверенными условиями; опубликованные предупреждения с проверенной допустимостью переработки. Записывать происхождение и основания метки. Удалять телефоны, имена, коды, реквизиты и URL-токены; исходный секретный текст не коммитить.
-
-Две основные эталонные метки: fraud и legitimate; uncertain направляется на разбор. Оба участника независимо размечают пилотные 100 примеров, фиксируют расхождения и правила разрешения. «Подозрительно» в интерфейсе - зона неопределённости решения, а не автоматически отдельный истинный класс. Рекламный spam отдельно помечается и не считается мошенничеством без основания.
-
-## Разделение и базовые варианты
-
-После дедупликации сформировать train/validation/test ориентировочно 60/20/20 по группам кампаний и шаблонов, с сохранением языковых долей. Домены одной кампании и близкие перефразировки не должны пересекать выборки. Зафиксировать seed, идентификаторы и хеш манифеста; пороги выбрать только на validation. Если есть даты, дополнительно оценить более поздний временной срез.
-
-B0: фиксированные правила текста и URL.B1: символьный/словесный TF-IDF и логистическая регрессия.B2: многоязычная модель и URL-сигналы. Обучать только после B0/B1; сравнить text-only, URL-only и combined на одном тестовом наборе.
+Mockups cover UC1-2 and the error state. History, Kazakh localisation and Telegram sign-in require further design. Detailed interaction specifications are in prototype/wireframes.md. User validation has not yet taken place.
 
 
-# 10 Метрики и условия испытаний
+# 10 Verification and evaluation protocol
 
-| Проверка | Метрика и процедура | Предварительный критерий |
+## Data and annotation
+
+Planned pilot: 600 anonymised messages, 300 each for RU and KZ, with both classes represented. Initial target per language: 100 fraudulent and 100 legitimate messages. These are collection targets, not an existing dataset. If data is insufficient, report actual coverage and uncertainty instead of replacing authentic data with generated examples.
+
+Sources: lawfully available public corpora; voluntary anonymised examples; controlled artificial examples for unit tests, labelled as synthetic. Remove identifiers and secret codes. Retain language, date, campaign and URL signals; do not automatically open malicious links.
+
+Use two reference classes: fraud and legitimate; uncertain cases require review. Two annotators independently label the first 100 examples, discuss disagreements and refine guidelines. Keywords and suspicious URLs are evidence for annotation, not automatic proof of the true class. Keep advertising spam separate from fraud.
+
+## Splits and baselines
+
+After deduplication, create approximately 60/20/20 train/validation/test splits grouped by campaigns and domains, with language balance. Copies of the same template or campaign must not cross splits. Record the seed, identifiers and configuration hash. Select thresholds on validation only. If dates permit, additionally evaluate a later time slice.
+
+B0: deterministic text and URL rules.B1: word/character TF-IDF with logistic regression.B2: multilingual encoder with URL signals. Evaluate after B0/B1; compare text-only, URL-only and combined variants on the same test set.
+
+
+# 10 Metrics and acceptance criteria
+
+| Verification | Metric and procedure | Provisional criterion |
 | --- | --- | --- |
-| Детекция | Precision, recall, F1 класса fraud; macro-F1; confusion matrix, размеры выборок и 95% CI; отдельно RU/KZ. | Цель recall ≥ 0.85 и FPR ≤ 0.10 для каждого языка. Пороги согласовать; результат ещё не измерен. |
-| Неопределённость | Доля ответов suspicious и coverage; FPR/recall считать на всех бинарных решениях, указать выбранный порог. | Не скрывать сложные случаи исключением из отчёта; abstention считать отдельно. |
-| Задержка | p50/p95/p99, доля ошибок; 1000 запросов, 10 клиентов, локальный анализ, фиксированные CPU/RAM и версии. | NFR1: p95 ≤ 2 с; тайм-аут ≤ 5 с. |
-| Приватность и API | Изоляция истории, удаление, отсутствие сырого текста в логах; попытки внедрения HTML и инструкций. | Обязательные проверки T1-T4 проходят; ссылки не открываются анализатором. |
-| Пользовательский сценарий | 5 добровольцев; успешность без подсказки, время задания, понимание предупреждения. | 4/5 выполняют проверку; отобразить все ошибки и ограничения малой выборки. |
-| Сравнение | B0/B1/B2, одинаковый test split; paired bootstrap для разницы F1, описать конфигурации. | Зафиксировать реальный выигрыш или его отсутствие; не переносить цифры из чужих работ. |
+| Detection | Fraud precision, recall and F1; macro-F1; confusion matrix, sample sizes and 95% CI; separately for RU/KZ. | Target recall ≥ 0.85 and FPR ≤ 0.10 per language. Agree thresholds; no results measured yet. |
+| Uncertainty | Share of suspicious responses and coverage; compute FPR/recall across binary decisions and report the threshold. | Do not conceal difficult cases by excluding them; report abstention separately. |
+| Latency | p50/p95/p99 and error rate; 1000 requests, 10 clients, local analysis, fixed CPU/RAM and versions. | NFR1: p95 ≤ 2 s; timeout ≤ 5 s. |
+| Privacy and API | History isolation, deletion, no raw text in logs; HTML and instruction-injection attempts. | Mandatory T1-T4 checks pass; the analyser does not open links. |
+| User flow | 5 volunteers; unassisted completion, task time and warning comprehension. | 4/5 complete a check; disclose all errors and small-sample limitations. |
+| Comparison | B0/B1/B2 on the same test split; paired bootstrap for the F1 difference; document configurations. | Report actual improvement or its absence; do not import results from other studies. |
 
-## Отчётность испытаний
+## Reporting results
 
-Сохранять конфигурацию, версии данных и модели, команды запуска, результаты и ограничения. До запуска никаких чисел точности в отчёте не заявляется. Если 600 примеров недостаточно для устойчивого вывода, представить доверительные интервалы и план расширения корпуса.
+Report configurations, dataset sizes and composition, threshold selection, metrics and limitations. No local quality measurements have been performed yet. If 600 examples do not provide sufficient statistical power, report wide confidence intervals and a plan to expand the corpus.
 
 
-# 11 Управление проектом и роли
+# 11 Project management and risks
 
-| Участник | Планируемая зона ответственности | Подтверждённый вклад на текущем этапе |
+| Participant | Planned responsibility | Verified contribution at this stage |
 | --- | --- | --- |
-| Кендебаев Нұрасыл Ауесбекұлы, SE-2428 | Клиент, API, PostgreSQL, сбор первичных данных, интеграция. | Создана начальная версия репозитория и рабочая документация с помощью ИИ. Проверка участником и командное review ожидаются. |
-| Амирханов Асхат Нурланулы, SE-2428 | Классификация текста, URL и домены, эксперименты и метрики. | В переданном обосновании указана роль. История коммитов и фактически выполненные задачи ещё не проверены. |
+| Nurassyl Auesbekuly Kendebaev, SE-2428 | Client, API, PostgreSQL, initial data collection and integration. | Initial repository and working documentation prepared with AI assistance. Individual verification and team review are pending. |
+| Askhat Nurlanuly Amirkhanov, SE-2428 | Text classification, URLs and domains, experiments and metrics. | The supplied proposal states this role. Commit history and actual completed tasks have not yet been verified. |
 
-Репозиторий: https://github.com/Kendebaev/FraudShieldYouTrack: https://frauddetect.youtrack.cloud/issues/DIPАккаунты: Kendebaev и askmirkhanov-boop.
+Repository: https://github.com/Kendebaev/FraudShieldYouTrack: https://frauddetect.youtrack.cloud/issues/DIPAccounts: Kendebaev and askmirkhanov-boop.
 
-## Порядок работы
+## Working process
 
-Один репозиторий на весь диплом. Для каждой значимой задачи: ответственный, ожидаемый результат, критерий приёмки и срок. ID задачи включается в ветку и описание коммита/PR; задача ссылается обратно на результат. Каждый участник работает под собственным аккаунтом. Main содержит проверенную версию; изменения проходят review второго участника.
+One repository serves both team members. Each task has an owner, expected outcome, acceptance criteria and deadline. Include its ID in the branch and commit/PR description; provide genuine commits under the contributor's account. Changes undergo a second-member review. Main contains agreed versions; intermediate drafts stay on branches.
 
-Документация и дизайн также фиксируются по мере выполнения. Нельзя подменять реальную историю серией искусственно датированных коммитов или заявлять подготовленные автоматически материалы как уже проверенный личный вклад. Каждый участник должен проверить и объяснить свой раздел.
+The supervisor and commission need access to all materials. The current repository is publicly readable; verify reviewer access to private YouTrack resources or explicitly agree another accessible evidence route. Confirm access before submitting the form.
 
-## Контрольные точки
+## Immediate plan
 
-21 октября: репозиторий, доска и scope.22 октября: пользовательские обсуждения, обзор и архитектура.23 октября: отзыв руководителя, исправления, проверка доступов.24 октября: финальный экспорт, тег prob-period-1, PDF доски, форма до 18:00. Рекомендуемое внутреннее время готовности - 16:00 по местному времени проекта.
+21 October: discussions, evidence and scope.22 October: requirements traceability, data and architecture.23 October: supervisor review, corrections and access checks.24 October: final version, prob-period-1 tag, board PDF and form before 18:00. Recommended internal readiness deadline: 16:00 in the deadline's applicable time zone.
 
-График после 24 октября предварительный и не заменяет университетские сроки. В YouTrack созданы 15 задач с критериями; снимок списка находится в management/tasks.csv. Подготовленные разделы направлены на ревью, настройка доступов и сборка сдачи находятся в работе. Проверка командой не считается завершённой. Задачи Амирханова пока не назначены отдельному пользователю YouTrack; ответственный указан в описании.
+Tasks beyond 24 October are provisional and do not replace the immediate plan. Fifteen tasks with criteria exist in YouTrack; management/tasks.csv is their snapshot. Infrastructure tasks are in progress, prepared documents are in review and remaining items are in the backlog. Completion is not claimed. The second member has no separate assigned YouTrack account yet; responsibility is recorded in task descriptions.
 
 
-# 11 Риски и готовность к сдаче
+# 11 Risks and submission readiness
 
-| Риск | Ответственный | Снижение и сигнал пересмотра |
+| Risk | Owner | Mitigation and review trigger |
 | --- | --- | --- |
-| Недостаток реальных KZ-данных | Амирханов А.Н. | Ранний пилот; отдельно RU/KZ. При нехватке данных ограничить выводы и расширить сбор. |
-| Утечка шаблонов между split | Амирханов А.Н. | Дедупликация и группы кампаний/доменов; ручная проверка схожих сообщений. |
-| Ложное ощущение безопасности | Оба участника | Осторожные формулировки, отдельное состояние ошибки, измерение пропусков мошенничества. |
-| Передача личного текста | Кендебаев Н.А. | Без сохранения по умолчанию; отдельное согласие; не отправлять текст внешнему анализатору автоматически. |
-| Сложность двух серверных стеков | Кендебаев Н.А. | Контракт и smoke-test интеграции; при задержках объединить API в одном стеке. |
-| Недоступные ссылки при сдаче | Кендебаев Н.А. | Проверка под учётной записью проверяющего; подтверждение доступов до отправки. |
+| Insufficient real Kazakh data | A. N. Amirkhanov | Start a pilot early; evaluate RU/KZ separately. Limit claims and expand collection when data is insufficient. |
+| Template leakage across splits | A. N. Amirkhanov | Deduplicate and group campaigns/domains; manually inspect similar messages. |
+| False sense of safety | Both members | Use cautious wording, a separate error state and measurement of missed fraud. |
+| Disclosure of private text | N. A. Kendebaev | No storage by default; separate consent; no automatic external text analysis. |
+| Complexity of two server stacks | N. A. Kendebaev | Define contracts and integration smoke checks; consolidate the API if delays arise. |
+| Inaccessible submission links | N. A. Kendebaev | Verify with reviewer access; confirm permissions before submission. |
 
-## Что ещё нужно подтвердить
+## Outstanding evidence
 
-1. Персональный доступ второго участника в репозиторий и YouTrack.2. Реальные протоколы 3-5 бесед или содержательная договорённость с заказчиком.3. Содержательный отзыв руководителя и выполненные по нему изменения.4. История вклада обоих участников и review.5. Актуальный PDF доски на дату окончательной сдачи.6. Доступ руководителя и комиссии, совпадение отчёта с тегом сдачи.
+1. Each member's reviewed contribution and personal YouTrack access.2. Actual records of 3-5 discussions or documented client agreement.3. Substantive supervisor feedback and linked responses.4. Genuine individual contributions and team review.5. Updated PDF screenshots of the final board.6. Reviewer access to repository and tracker, a final tagged version and the submission form.
 
-Подписные обоснования допуска не заменяют содержательный отзыв по требованиям, архитектуре и плану оценки. Поля подписи и даты в переданных PDF пусты; наличие подписи или согласования не предполагается.
+The proposals provided are not evidence of user discussions, experiments or code contributions. The form and screenshot PDF are prepared separately; access and formal submission remain unconfirmed.
 
 
-# 12 Материалы для предзащиты
+# 12 Defence preparation
 
-## Короткое представление проекта
+## Suggested project introduction
 
-Мы разрабатываем приложение для проверки подозрительных сообщений на русском и казахском языках. Пользователь вставляет текст и получает уровень риска, признаки и рекомендации. В проекте сравниваются правила, простой текстовый классификатор и многоязычный подход с URL-сигналами. Кендебаев отвечает за клиент, API и данные, Амирханов - за анализ и оценку. Качество будет измерено на обезличенном локальном корпусе с независимым тестовым разделением.
+We are developing an assistant for checking suspicious messages in Russian and Kazakh. Users paste text manually and receive risk indicators, explanations and advice. The diploma will evaluate rules, a simple text classifier and a multilingual model with URL signals. One member covers the client, API and database; the other covers analysis and evaluation. Quality will be measured on a fixed local corpus against reproducible baselines.
 
-## Вопросы комиссии и основа ответа
+## Repository structure and submission package
 
-| Вопрос | На что опираться в ответе |
+| Question | Evidence for the answer |
 | --- | --- |
-| Кому и зачем нужен проект? | Проблема [10] плюс фактические беседы, когда они будут проведены. Не выдавать гипотезы за результаты. |
-| Чем отличается от Scamio и Genie? | Собственная инженерная реализация и проверяемая локальная оценка; преимущество пока не доказано. |
-| Почему выбран этот стек? | Раздел 5, требования и цена интеграции. Решение можно упростить по результатам прототипа. |
-| Что означает «подозрительно»? | Зона неопределённости и набор признаков; не гарантированный диагноз и не третья истинная метка без протокола. |
-| Как докажете качество? | B0/B1/B2, групповой test split, RU/KZ метрики, FPR, recall, CI и задержка. |
-| Что сделал каждый? | Показать свои задачи, изменения и review; уметь объяснить каждое решение. |
-| Что уже работает? | Показывать только реально запускаемый код. Эти материалы описывают анализ и дизайн, не готовое приложение. |
+| Who needs this project and why? | Problem evidence [10] and actual discussions once conducted. Distinguish hypotheses from findings. |
+| How does it differ from Scamio and Genie? | Independent engineering and verifiable local evaluation; superiority is not yet demonstrated. |
+| Why this stack? | Section 5, requirements and integration costs. Simplify based on prototype findings. |
+| What does suspicious mean? | An uncertainty region and indicators, not a guaranteed diagnosis or an unqualified third ground-truth class. |
+| How will you establish quality? | B0/B1/B2, grouped test split, RU/KZ metrics, FPR, recall, confidence intervals and latency. |
+| What did each member do? | Show personal tasks, changes and reviews; explain every decision. |
+| What already works? | Demonstrate only code that actually runs. These materials cover analysis and design, not a complete application. |
 
-На демонстрации открыть README, диаграммы, макеты, выбранную задачу и связанное изменение, затем показать замечания review. Представитель команды заполняет одну форму на всех. Отдельные PDF: общий отчёт и реальные снимки доски/задач.
-
-
-# Список источников
-
-[1] Cejas O. A., Guo Y., Tang Q. (2026). Large-Scale Multilingual SMS Fraud Detection For Telecom Networks. NLPAICS, научная публикация.https://aclanthology.org/2026.nlpaics-1.7/
-
-[2] Ali F. D. M. A. et al. (2025). MOZ-Smishing: A Benchmark Dataset for Detecting Mobile Money Frauds. AfricaNLP, научная публикация.https://aclanthology.org/2025.africanlp-1.23/
-
-[3] Timko D., Rahman M. L. (2024). Smishing Dataset I: Phishing SMS Dataset from Smishtank.com. CODASPY, научная публикация; авторская версия arXiv.https://arxiv.org/abs/2402.18430
-
-[4] Nahapetyan A. et al. (2024). On SMS Phishing Tactics and Infrastructure. IEEE S&amp;P, научная публикация; материалы авторов.https://github.com/wspr-ncsu/sms-phishing
-
-[5] Hosseinpour S., Das S. (2025). POSTER: A Multi-Signal Model for Detecting Evasive Smishing. WiSec, научный постер; авторская версия arXiv.https://arxiv.org/abs/2505.18233
-
-[6] Islam M. R. et al. (2024). PhishGuard: A Convolutional Neural Network Based Model for Detecting Phishing URLs with Explainability Analysis. Научный препринт arXiv.https://arxiv.org/abs/2404.17960
-
-[7] Togmanov M. et al. (2025). KazMMLU: Evaluating Language Models on Kazakh, Russian, and Regional Knowledge of Kazakhstan. ACL, научная публикация.https://aclanthology.org/2025.acl-long.701/
-
-[8] Conneau A. et al. (2020). Unsupervised Cross-lingual Representation Learning at Scale. ACL, фундаментальная научная публикация.https://aclanthology.org/2020.acl-main.747/
-
-[9] UCI Machine Learning Repository (2012). SMS Spam Collection. Датасет.https://archive.ics.uci.edu/dataset/228/sms+spam+collection
-
-[10] Государственный портал Республики Казахстан (2026). Закон и порядок и защита цифровых прав граждан. Официальные сведения о мошенничестве.https://www.gov.kz/org/aqmola-selinograd/press/news/details/1308837?lang=ru
-
-Дата обращения к электронным источникам: 20 октября 2026 года. Восемь научных работ [1-8], остальные - данные, официальные сведения и документация. Статус препринта указан явно.
+The repository contains a README, report, diagrams, task snapshot and editable sources for team review. Each participant should commit genuine work under their own account. The submission requires two PDFs: the unified report and real board/task screenshots.
 
 
-# Список источников продолжение
+# References
 
-[11] Bitdefender (б. г.). Scamio. Официальное описание продукта.https://www.bitdefender.com/en-sg/consumer/scamio
+[1] Cejas O. A., Guo Y., Tang Q. (2026). Large-Scale Multilingual SMS Fraud Detection For Telecom Networks. NLPAICS, scientific publication.https://aclanthology.org/2026.nlpaics-1.7/
 
-[12] Norton (б. г.). FAQ: Norton Genie. Официальная поддержка продукта.https://support.norton.com/sp/en/us/home/current/solutions/v20230717145233467
+[2] Ali F. D. M. A. et al. (2025). MOZ-Smishing: A Benchmark Dataset for Detecting Mobile Money Frauds. AfricaNLP, scientific publication.https://aclanthology.org/2025.africanlp-1.23/
 
-[13] VirusTotal (б. г.). How it works; Private Scanning. Официальная документация.https://docs.virustotal.com/docs/how-it-works
+[3] Timko D., Rahman M. L. (2024). Smishing Dataset I: Phishing SMS Dataset from Smishtank.com. CODASPY, scientific publication; author version on arXiv.https://arxiv.org/abs/2402.18430
 
-[14] Google (б. г.). Safe Browsing. Официальная документация.https://developers.google.com/safe-browsing
+[4] Nahapetyan A. et al. (2024). On SMS Phishing Tactics and Infrastructure. IEEE S&amp;P, scientific publication; authors&#x27; materials.https://github.com/wspr-ncsu/sms-phishing
 
-[15] FastAPI (б. г.). Features. Официальная документация.https://fastapi.tiangolo.com/features/
+[5] Hosseinpour S., Das S. (2025). POSTER: A Multi-Signal Model for Detecting Evasive Smishing. WiSec, scientific poster; author version on arXiv.https://arxiv.org/abs/2505.18233
 
-[16] Express (б. г.). Express web framework. Официальная документация.https://expressjs.com/
+[6] Islam M. R. et al. (2024). PhishGuard: A Convolutional Neural Network Based Model for Detecting Phishing URLs with Explainability Analysis. Scientific preprint on arXiv.https://arxiv.org/abs/2404.17960
 
-[17] PostgreSQL (б. г.). JSON Types. Официальная документация.https://www.postgresql.org/docs/current/datatype-json.html
+[7] Togmanov M. et al. (2025). KazMMLU: Evaluating Language Models on Kazakh, Russian, and Regional Knowledge of Kazakhstan. ACL, scientific publication.https://aclanthology.org/2025.acl-long.701/
 
-[18] Telegram (б. г.). Telegram Mini Apps. Официальная документация.https://core.telegram.org/bots/webapps
+[8] Conneau A. et al. (2020). Unsupervised Cross-lingual Representation Learning at Scale. ACL, foundational scientific publication.https://aclanthology.org/2020.acl-main.747/
 
-[19] scikit-learn (б. г.). Text feature extraction. Официальная документация.https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction
+[9] UCI Machine Learning Repository (2012). SMS Spam Collection. Dataset.https://archive.ics.uci.edu/dataset/228/sms+spam+collection
 
-[20] Microsoft (б. г.). ASP.NET Core APIs overview. Официальная документация.https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis?view=aspnetcore-10.0
+[10] Government portal of the Republic of Kazakhstan (2026). Law and order and protection of citizens&#x27; digital rights [translated title]. Official information on fraud.https://www.gov.kz/org/aqmola-selinograd/press/news/details/1308837?lang=ru
 
-Дополнительная документация о приватном сканировании VirusTotal: https://docs.virustotal.com/docs/private-scanning. Сравнительная таблица фиксирует только подтверждённые свойства; цены и локальное качество не предполагаются.
+Access and documentation check date: 20 October 2026. The first eight entries [1-8] are scientific works; the others are data, official materials and documentation. Links continue on the next page.
+
+
+# References continued
+
+[11] Bitdefender (n.d.). Scamio. Official product description.https://www.bitdefender.com/en-sg/consumer/scamio
+
+[12] Norton (n.d.). FAQ: Norton Genie. Official product support.https://support.norton.com/sp/en/us/home/current/solutions/v20230717145233467
+
+[13] VirusTotal (n.d.). How it works; Private Scanning. Official documentation.https://docs.virustotal.com/docs/how-it-works
+
+[14] Google (n.d.). Safe Browsing. Official documentation.https://developers.google.com/safe-browsing
+
+[15] FastAPI (n.d.). Features. Official documentation.https://fastapi.tiangolo.com/features/
+
+[16] Express (n.d.). Express web framework. Official documentation.https://expressjs.com/
+
+[17] PostgreSQL (n.d.). JSON Types. Official documentation.https://www.postgresql.org/docs/current/datatype-json.html
+
+[18] Telegram (n.d.). Telegram Mini Apps. Official documentation.https://core.telegram.org/bots/webapps
+
+[19] scikit-learn (n.d.). Text feature extraction. Official documentation.https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction
+
+[20] Microsoft (n.d.). ASP.NET Core APIs overview. Official documentation.https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis?view=aspnetcore-10.0
+
+Additional VirusTotal privacy documentation: https://docs.virustotal.com/docs/private-scanning. Published product descriptions require practical verification; pricing and usage conditions have not been assumed.

@@ -1,7 +1,7 @@
-# Проверка руководителем
+# Supervisor feedback
 
-Статус: вопросы подготовлены; реальный отзыв ещё не получен.
+Status: discussion agenda; substantive feedback has not yet been received.
 
-Просить проверить: границы MVP, RU/KZ-корпус и разметку, различие spam/fraud, метрики и FPR, выбор двух серверных стеков, требования приватности, реалистичность графика.
+Discuss MVP scope, RU/KZ data and annotation, spam versus fraud, thresholds and FPR, choice of server stacks, privacy and practical novelty.
 
-Для каждого замечания записать: дату, точный текст или подтверждённый пересказ, автора, решение команды, файл/PR с исправлением, статус проверки. Не добавлять подпись и не утверждать согласование без фактического подтверждения.
+For every actual comment record the date, exact wording or agreed summary, decision, owner, version/PR with correction and verification status. Do not invent feedback or present this agenda as supervisor approval.

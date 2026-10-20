@@ -1,38 +1,40 @@
 # Development of an Application for Detecting Phishing and Fraudulent Messages
 
-Приложение для ручной проверки подозрительных сообщений на русском и казахском языках в Казахстане. Цель - уровень риска, объяснение и рекомендации на основе текста и URL.
+**FraudShield** supports manual checking of suspicious Russian and Kazakh messages in Kazakhstan. The aim is to provide risk indicators, explanations and advice from text and URL analysis.
 
-## Команда
-- Кендебаев Нұрасыл Ауесбекұлы, SE-2428: клиент, серверный API, БД, сбор данных и интеграция. GitHub: https://github.com/Kendebaev.
-- Амирханов Асхат Нурланулы, SE-2428: анализ текста/URL, классификация и оценка. GitHub: https://github.com/askmirkhanov-boop.
-- Руководитель: Серек Азамат Галымжанович, ассоциированный профессор.
+## Team
+- Nurassyl Auesbekuly Kendebaev, SE-2428: client, API, database, data collection and integration. GitHub: https://github.com/Kendebaev.
+- Askhat Nurlanuly Amirkhanov, SE-2428: text/URL analysis, classification and evaluation. GitHub: https://github.com/askmirkhanov-boop.
+- Supervisor: Azamat Galymzhanovich Serek, Associate Professor.
 
-## Область и статус
-Включены анализ, требования, архитектура, макеты, протокол данных и оценки. Код приложения, локальные эксперименты, пользовательские интервью и фактический review ещё не подтверждены. Полное приложение к первому этапу не требуется.
+Names are transliterated for this English draft; confirm official Latin spellings before submission.
 
-MVP: ручная вставка текста, локальный разбор URL без открытия, объяснение, история по согласию. Авточтение чатов, SMS и звонки вне scope.
+## Scope and status
+This package contains analysis, requirements, architecture, mockups and data/evaluation protocols. Application code, local experiments, user interviews and substantive review are not yet verified. A complete application is not required for this first period.
 
-## Предварительный стек
-React web, Express API, FastAPI analyzer, PostgreSQL, Docker; Telegram Mini App опционально. Решения требуют проверки командой, см. отчёт.
+MVP: manual text entry, local URL parsing without visiting links, explanations and opt-in history. Automatic access to chats/SMS and call analysis are outside scope.
 
-## Материалы
-- docs/Diploma_Report_Working.pdf - единый рабочий отчёт.
-- docs/report.md - редактируемый текст.
-- docs/references.json - 20 источников, включая 8 научных работ.
-- diagrams/ - исходники Mermaid/PlantUML и читаемые PDF-экспорты.
-- prototype/wireframes.md - спецификация макетов.
-- management/tasks.csv - снимок 15 задач YouTrack, ответственные и приёмка. Задачи Амирханова пока не назначены отдельному пользователю YouTrack; ответственный указан в описании.
-- management/YouTrack_Board_and_Tasks.pdf - реальные снимки доски и карточек на 20 октября 2026 года.
-- evidence/ - бланки реальных интервью и review; не доказательства выполнения.
-- tests/verification_plan.md - план тестирования.
+## Provisional stack
+React web, Express API, FastAPI analyser, PostgreSQL, Docker; optional Telegram Mini App. The team must review these decisions; see the report.
 
-## Ссылки и доступ
-URL репозитория: https://github.com/Kendebaev/FraudShield
-URL YouTrack: https://frauddetect.youtrack.cloud/issues/DIP
-Перед сдачей открыть доступ руководителю и комиссии и проверить ссылки с их стороны.
+## Materials
+- docs/Diploma_Report_Working.pdf: unified working report in English.
+- docs/report.md: editable report text.
+- docs/references.json: 20 sources, including 8 scientific works.
+- diagrams/: editable Mermaid/PlantUML and readable PDF exports.
+- prototype/wireframes.md: interaction specification.
+- management/tasks.csv: 15 YouTrack tasks, planned owners and acceptance criteria. Amirkhanov's tasks do not yet have a separate YouTrack user; responsibility is recorded in descriptions.
+- management/YouTrack_Board_and_Tasks.pdf: actual board and task screenshots.
+- evidence/: blank templates for actual interviews and review, not completion evidence.
+- tests/verification_plan.md: verification plan.
 
-## Запуск и тестирование
-Работающего приложения в этом пакете нет. PDF открывается обычным просмотрщиком. После появления кода добавить инструкции запуска, переменные окружения и проверяемые команды тестирования.
+## Links and access
+Repository: https://github.com/Kendebaev/FraudShield
+YouTrack: https://frauddetect.youtrack.cloud/issues/DIP
+Provide supervisor/commission access and verify their ability to open links before submission.
 
-## Процесс
-Каждый участник работает под своим аккаунтом. Задача -> ветка с ID -> PR -> review -> merge. История фиксирует настоящую работу; не создавать фиктивные коммиты, задние даты или вклад второго участника. Финальный отчёт и снимки реальной доски должны совпадать с тегом `prob-period-1`, указанным в форме. Отправляет один представитель команды до 18:00 24 октября 2026 года.
+## Running and testing
+This package contains no working application. Open PDFs in a standard viewer. Once code exists, add setup instructions, environment variables and executable test commands.
+
+## Process
+Each member uses their own account. Task -> branch with ID -> PR -> review -> merge. Record genuine work; do not create fictitious contributions, backdated commits or invented evidence. The final report and real board screenshots must match the prob-period-1 tag declared in the form. One representative submits for the team by 18:00 on 24 October 2026.

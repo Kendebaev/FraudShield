@@ -1,23 +1,23 @@
-# Связь задач и материалов
+# Task-to-material traceability
 
 YouTrack: https://frauddetect.youtrack.cloud/issues/DIP
 
-Черновик изменений: https://github.com/Kendebaev/FraudShield/pull/1
+Draft pull request: https://github.com/Kendebaev/FraudShield/pull/1
 
-Начальная версия документации: https://github.com/Kendebaev/FraudShield/commit/fffa0ba7ee19c2c38165eb284ba7ce4101544d88
+Initial documentation version: https://github.com/Kendebaev/FraudShield/commit/fffa0ba7ee19c2c38165eb284ba7ce4101544d88
 
-## Трассируемость
+## Traceability
 
-| Задача | Материал | Состояние |
+| Task | Material | Status |
 | --- | --- | --- |
-| [DIP-1](https://frauddetect.youtrack.cloud/issue/DIP-1) | docs/report.md раздел 1 | Рабочая версия, ожидает ревью |
-| [DIP-3](https://frauddetect.youtrack.cloud/issue/DIP-3) | docs/report.md раздел 3 и docs/references.json | Полные тексты изучены при подготовке; проверка участником ожидается |
-| [DIP-4](https://frauddetect.youtrack.cloud/issue/DIP-4) | docs/report.md разделы 5 и 8 | Ожидает согласования |
-| [DIP-5](https://frauddetect.youtrack.cloud/issue/DIP-5) | docs/report.md раздел 4 | Ожидает ревью |
-| [DIP-6](https://frauddetect.youtrack.cloud/issue/DIP-6) | diagrams/ и docs/report.md разделы 6-8 | Ожидает ревью |
-| [DIP-10](https://frauddetect.youtrack.cloud/issue/DIP-10) | README.md, management/tasks.csv, доска YouTrack | В работе; персональные доступы ещё не завершены |
-| [DIP-12](https://frauddetect.youtrack.cloud/issue/DIP-12) | docs/Diploma_Report_Working.pdf и management/YouTrack_Board_and_Tasks.pdf | Рабочие PDF готовы, окончательная сдача не выполнена |
+| [DIP-1](https://frauddetect.youtrack.cloud/issue/DIP-1) | docs/report.md section 1 | Working draft; review pending |
+| [DIP-3](https://frauddetect.youtrack.cloud/issue/DIP-3) | docs/report.md section 3 and docs/references.json | Full texts examined during preparation; participant verification pending |
+| [DIP-4](https://frauddetect.youtrack.cloud/issue/DIP-4) | docs/report.md sections 5 and 8 | Agreement pending |
+| [DIP-5](https://frauddetect.youtrack.cloud/issue/DIP-5) | docs/report.md section 4 | Review pending |
+| [DIP-6](https://frauddetect.youtrack.cloud/issue/DIP-6) | diagrams/ and docs/report.md sections 6-8 | Review pending |
+| [DIP-10](https://frauddetect.youtrack.cloud/issue/DIP-10) | README.md, management/tasks.csv and YouTrack board | In progress; personal access incomplete |
+| [DIP-12](https://frauddetect.youtrack.cloud/issue/DIP-12) | docs/Diploma_Report_Working.pdf and management/YouTrack_Board_and_Tasks.pdf | Working PDFs prepared; final submission pending |
 
-Материалы подготовлены с помощью ИИ и не подтверждают личный вклад второго участника или состоявшееся review. Критерии приёмки в CSV описывают условия завершения, а не утверждают, что эти условия уже выполнены. История коммитов отражает фактическую подготовку 20 октября 2026 года.
+Materials were prepared with AI assistance. They do not establish the second member's individual contribution or completed review. CSV acceptance criteria describe completion conditions, not completed work. Commit history records actual preparation on 20 October 2026. English files replace the earlier Russian drafts; original reference documents remain unchanged.
 
-Тег `prob-period-1` должен указывать на окончательно проверенную версию, совпадающую с файлами в форме. Он пока не создан.
+The `prob-period-1` tag must identify a final reviewed version matching the form attachments. It has not yet been created.
