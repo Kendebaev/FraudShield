@@ -1,6 +1,6 @@
 FraudShieldDevelopment of an Application for Detecting Phishing and Fraudulent Messages
 
-First probationary period submission materialsSoftware Engineering · SE-242820 October 2026
+First probationary period submission materialsSoftware Engineering20 October 2026
 
 TeamNurassyl Auesbekuly KendebaevAskhat Nurlanuly Amirkhanov
 
@@ -268,8 +268,8 @@ Report configurations, dataset sizes and composition, threshold selection, metri
 
 | Participant | Planned responsibility | Verified contribution at this stage |
 | --- | --- | --- |
-| Nurassyl Auesbekuly Kendebaev, SE-2428 | Client, API, PostgreSQL, initial data collection and integration. | Initial repository and working documentation prepared with AI assistance. Individual verification and team review are pending. |
-| Askhat Nurlanuly Amirkhanov, SE-2428 | Text classification, URLs and domains, experiments and metrics. | The supplied proposal states this role. Commit history and actual completed tasks have not yet been verified. |
+| Nurassyl Auesbekuly Kendebaev | Client, API, PostgreSQL, initial data collection and integration. | Initial repository and working documentation prepared with AI assistance. Individual verification and team review are pending. |
+| Askhat Nurlanuly Amirkhanov | Text classification, URLs and domains, experiments and metrics. | The supplied proposal states this role. Commit history and actual completed tasks have not yet been verified. |
 
 Repository: https://github.com/Kendebaev/FraudShieldYouTrack: https://frauddetect.youtrack.cloud/issues/DIPAccounts: Kendebaev and askmirkhanov-boop.
 
