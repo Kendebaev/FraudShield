@@ -1,0 +1,6 @@
+flowchart LR
+ C[React web / Telegram оболочка] -->|HTTPS JSON| A[Express API]
+ A -->|REST JSON| M[FastAPI analyzer]
+ A -->|История по согласию| D[(PostgreSQL)]
+ M --> T[Текстовые признаки / модель]
+ M --> U[Локальный разбор URL]

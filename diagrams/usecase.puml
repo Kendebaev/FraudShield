@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "Пользователь" as U
+rectangle "Система проверки" {
+ usecase "UC1 Проверить текст и URL" as C
+ usecase "UC2 Прочитать объяснение" as E
+ usecase "UC3 Сохранить по согласию" as S
+ usecase "UC4 Просмотреть и удалить историю" as H
+}
+U --> C
+U --> E
+U --> S
+U --> H
+note right of S: Требуются вход и явное согласие
+note right of H: Только собственные записи
+@enduml
