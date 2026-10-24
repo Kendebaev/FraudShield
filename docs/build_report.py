@@ -3,6 +3,7 @@ import re,html,fitz,tempfile,os
 from urllib.parse import urljoin
 from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,Table,TableStyle,PageBreak,Image
 from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
+from reportlab.platypus.tableofcontents import TableOfContents
 from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -42,11 +43,27 @@ def para(t,style='BodyText'):
 def footer(c,d):
  c.setStrokeColor(colors.HexColor('#dce2e9'));c.line(42,37,553,37)
  c.setFont('Arial',8);c.setFillColor(colors.HexColor('#526176'));c.drawRightString(553,25,str(d.page))
+class ReportDocTemplate(SimpleDocTemplate):
+ def afterFlowable(self, flowable):
+  if isinstance(flowable, Paragraph) and flowable.style.name == 'Heading1':
+   title=flowable.getPlainText()
+   key=flowable.toc_key
+   self.canv.bookmarkPage(key)
+   self.canv.addOutlineEntry(title,key,level=0)
+   self.notify('TOCEntry',(0,title,self.page,key))
+
 def build(text,path,report=False):
- story=[];lines=text.splitlines();i=0
+ story=[];lines=text.splitlines();i=0;heading_index=0
  while i<len(lines):
   line=lines[i].strip();i+=1
   if not line:continue
+  if line == '<!-- TOC -->':
+   story.extend([PageBreak(),para('Contents','Title'),Spacer(1,16)])
+   toc=TableOfContents()
+   toc.levelStyles=[ParagraphStyle(name='TOCLevel0',fontName='Arial',fontSize=10,leading=15,spaceBefore=7,leftIndent=0,firstLineIndent=0)]
+   toc.dotsMinLevel=0
+   story.append(toc)
+   continue
   if line == 'FraudShield':
    story.extend([Spacer(1,90),para(line,'Title'),Spacer(1,15)]);continue
   match=re.fullmatch(r'!\[([^\]]*)\]\(([^)]+)\)',line)
@@ -71,7 +88,9 @@ def build(text,path,report=False):
    story.extend([table,Spacer(1,9)]);continue
   if line.startswith('# '):
    if report and story:story.append(PageBreak())
-   story.append(para(line[2:],'Heading1'))
+   heading=para(line[2:],'Heading1')
+   heading.toc_key='section-'+str(heading_index);heading_index+=1
+   story.append(heading)
    diagram={'7 Architecture and use cases':'context','7 Use case diagram':'usecase','7 Components and data':'components'}.get(line[2:]) if report else None
    if diagram:
     doc=fitz.open(base/'diagrams'/(diagram+'.pdf'));pg=doc[0]
@@ -87,7 +106,7 @@ def build(text,path,report=False):
    continue
   if line.startswith('## '):story.append(para(line[3:],'Heading2'));continue
   story.append(para(line));story.append(Spacer(1,5))
- SimpleDocTemplate(str(path),pagesize=(595.28,841.89),rightMargin=42,leftMargin=42,topMargin=40,bottomMargin=51,title=path.stem,author='FraudShield - working draft').build(story,onFirstPage=footer,onLaterPages=footer)
+ ReportDocTemplate(str(path),pagesize=(595.28,841.89),rightMargin=42,leftMargin=42,topMargin=40,bottomMargin=51,title=path.stem,author='FraudShield - working draft').multiBuild(story,onFirstPage=footer,onLaterPages=footer)
 
 if __name__ == '__main__':
  build((base/'docs/report.md').read_text(),base/'docs/Diploma_Report_Working.pdf',True)
