@@ -235,7 +235,7 @@ Mockups cover UC1-2 and the error state. History, Kazakh localisation and Telegr
 
 ## Data and annotation
 
-Planned pilot: 600 anonymised messages, 300 each for RU and KZ, with both classes represented. Initial target per language: 100 fraudulent and 100 legitimate messages. These are collection targets, not an existing dataset. If data is insufficient, report actual coverage and uncertainty instead of replacing authentic data with generated examples.
+Planned pilot: 600 anonymised messages, 300 each for RU and KZ. Target per language: 150 fraudulent and 150 legitimate messages (300 fraudulent and 300 legitimate overall). These are collection targets, not an existing dataset. If data is insufficient, report actual coverage and uncertainty instead of replacing authentic data with generated examples.
 
 Sources: lawfully available public corpora; voluntary anonymised examples; controlled artificial examples for unit tests, labelled as synthetic. Remove identifiers and secret codes. Retain language, date, campaign and URL signals; do not automatically open malicious links.
 
@@ -246,6 +246,8 @@ Use two reference classes: fraud and legitimate; uncertain cases require review.
 After deduplication, create approximately 60/20/20 train/validation/test splits grouped by campaigns and domains, with language balance. Copies of the same template or campaign must not cross splits. Record the seed, identifiers and configuration hash. Select thresholds on validation only. If dates permit, additionally evaluate a later time slice.
 
 B0: deterministic text and URL rules.B1: word/character TF-IDF with logistic regression.B2: multilingual encoder with URL signals. Evaluate after B0/B1; compare text-only, URL-only and combined variants on the same test set.
+
+The proposed operational protocol is detailed in tests/verification_plan.md (DIP-8): annotation and disagreement handling, campaign-grouped splits, training-only preprocessing, frozen validation thresholds, per-language metrics and uncertainty, and planned checks T1-T7. At the nominal 60/20/20 split, each language has approximately 30 fraudulent and 30 legitimate test messages; results will be pilot evidence with limited precision, not a broad performance guarantee. This protocol awaits team and supervisor review; no execution results are claimed.
 
 
 # 10 Metrics and acceptance criteria
@@ -268,7 +270,7 @@ Report configurations, dataset sizes and composition, threshold selection, metri
 
 | Participant | Planned responsibility | Verified contribution at this stage |
 | --- | --- | --- |
-| Nurassyl Auesbekuly Kendebaev | Client, API, PostgreSQL, initial data collection and integration. | Initial repository and working documentation prepared with AI assistance. Individual verification and team review are pending. |
+| Nurassyl Auesbekuly Kendebaev | Client, API, PostgreSQL, initial data collection and integration. | Initial repository and working documentation are available. Individual verification and team review are pending. |
 | Askhat Nurlanuly Amirkhanov | Text classification, URLs and domains, experiments and metrics. | The supplied proposal states this role. Commit history and actual completed tasks have not yet been verified. |
 
 Repository: https://github.com/Kendebaev/FraudShieldYouTrack: https://frauddetect.youtrack.cloud/issues/DIPAccounts: Kendebaev and askmirkhanov-boop.
