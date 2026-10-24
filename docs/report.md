@@ -1,10 +1,19 @@
-FraudShieldDevelopment of an Application for Detecting Phishing and Fraudulent Messages
+FraudShield
 
-First probationary period submission materialsSoftware Engineering20 October 2026
+Development of an Application for Detecting Phishing and Fraudulent Messages
 
-TeamNurassyl Auesbekuly KendebaevAskhat Nurlanuly Amirkhanov
+First probationary period submission materials
 
-SupervisorAzamat Galymzhanovich SerekAssociate Professor
+Software Engineering
+
+Updated: 24 October 2026
+
+Team:
+
+- Nurassyl Auesbekuly Kendebaev
+- Askhat Nurlanuly Amirkhanov
+
+Supervisor: Azamat Galymzhanovich Serek, Associate Professor
 
 The project supports manual checking of suspicious text and links, with explanations of risk indicators. This submission presents domain analysis, requirements, architecture, mockups and an evaluation plan.
 
@@ -23,7 +32,12 @@ Develop and evaluate an application prototype that accepts message text, identif
 
 ## Objectives
 
-1. Study smishing detection approaches and limitations of available datasets.2. Validate user needs and agree measurable requirements.3. Prepare an anonymised corpus and annotation guidelines.4. Implement the client, API, opt-in history and analysis module.5. Compare rules, a simple text classifier and an extended approach.6. Evaluate detection quality, false alarms, latency and explanation clarity.
+1. Study smishing detection approaches and limitations of available datasets.
+2. Validate user needs and agree measurable requirements.
+3. Prepare an anonymised corpus and annotation guidelines.
+4. Implement the client, API, opt-in history and analysis module.
+5. Compare rules, a simple text classifier and an extended approach.
+6. Evaluate detection quality, false alarms, latency and explanation clarity.
 
 ## Scope
 
@@ -170,12 +184,16 @@ Internal categories are high, suspicious and low_signal. User-facing labels are 
 
 Users submit text manually and receive an assessment. The team manages corpus and model versions. External URL reputation checks are optional; the default analysis does not visit links. The architecture requires no access to private chats or SMS.
 
+[System context diagram](../diagrams/context.pdf); editable source: [context.mmd](../diagrams/context.mmd).
+
 ## Main flow UC1
 
 The user pastes a message → the interface checks length → the API validates the request → the analyser normalises text and extracts URLs → signals are combined → an explanation is returned → the interface displays the result. Saving requires consent and an authenticated owner. A timeout produces an availability error.
 
 
 # 7 Use case diagram
+
+[Use case diagram](../diagrams/usecase.pdf); editable source: [usecase.puml](../diagrams/usecase.puml).
 
 | Use case | Precondition | Success / exception |
 | --- | --- | --- |
@@ -188,6 +206,8 @@ Feedback FR8 is an optional action after a result. Telegram authentication FR10 
 
 
 # 7 Components and data
+
+[Component diagram](../diagrams/components.pdf); editable source: [components.mmd](../diagrams/components.mmd).
 
 | Entity | Purpose and main fields |
 | --- | --- |
@@ -203,9 +223,21 @@ Anonymous checks do not create database history. A retention period must be expl
 
 ## Draft API contract
 
-POST /api/v1/checks/analyzeRequest: text (1-5000 characters), language (ru/kk/auto). Anonymous message text is not stored.Response 200: request_id, status=completed, risk_level, reasons[], urls[], model_version, processing_ms. Reasons contain code and description.Errors: 422 invalid input; 429 rate limit exceeded; 503 analysis unavailable. A failure must not return risk_level=low_signal.
+POST /api/v1/checks/analyze
 
-POST /api/v1/history: save a result with explicit consent for an authenticated user.GET /api/v1/history: current owner's history.DELETE /api/v1/history/{id}: delete an owned record.POST /api/v1/feedback: optional feedback; does not automatically change the reference label.
+Request: text (1-5000 characters), language (ru/kk/auto). Anonymous message text is not stored.
+
+Response 200: request_id, status=completed, risk_level, reasons[], urls[], model_version, processing_ms. Reasons contain code and description.
+
+Errors: 422 invalid input; 429 rate limit exceeded; 503 analysis unavailable. A failure must not return risk_level=low_signal.
+
+POST /api/v1/history: save a result with explicit consent for an authenticated user.
+
+GET /api/v1/history: current owner's history.
+
+DELETE /api/v1/history/{id}: delete an owned record.
+
+POST /api/v1/feedback: optional feedback; does not automatically change the reference label.
 
 ## Requirements, components and verification
 
@@ -222,13 +254,17 @@ POST /api/v1/history: save a result with explicit consent for an authenticated u
 
 # 9 UX and mockups
 
+![Checking, result and unavailable-state mockups](../prototype/mockups.png)
+
+Editable vector source: [mockups.svg](../prototype/mockups.svg). Restored from the original report; these are design mockups, not an implemented interface.
+
 ## Key interactions
 
 The first screen explains the purpose, input limit and absence of automatic storage. Disable checking for empty input and while a request is running. Results contain a text category, specific indicators and practical advice; colour is only a supplementary cue.
 
 The low-signal state retains: "This does not guarantee safety. Verify the sender through an official channel." Error screens do not show a green checkmark. History controls appear after sign-in; consent to history storage does not imply consent to research use.
 
-Mockups cover UC1-2 and the error state. History, Kazakh localisation and Telegram sign-in require further design. Detailed interaction specifications are in prototype/wireframes.md. User validation has not yet taken place.
+The three static mockups cover UC1-2 and the error state. History, Kazakh localisation and Telegram sign-in require further design. Detailed interaction specifications are in prototype/wireframes.md. User validation has not yet taken place.
 
 
 # 10 Verification and evaluation protocol
@@ -245,7 +281,11 @@ Use two reference classes: fraud and legitimate; uncertain cases require review.
 
 After deduplication, create approximately 60/20/20 train/validation/test splits grouped by campaigns and domains, with language balance. Copies of the same template or campaign must not cross splits. Record the seed, identifiers and configuration hash. Select thresholds on validation only. If dates permit, additionally evaluate a later time slice.
 
-B0: deterministic text and URL rules.B1: word/character TF-IDF with logistic regression.B2: multilingual encoder with URL signals. Evaluate after B0/B1; compare text-only, URL-only and combined variants on the same test set.
+B0: deterministic text and URL rules.
+
+B1: word/character TF-IDF with logistic regression.
+
+B2: multilingual encoder with URL signals. Evaluate after B0/B1; compare text-only, URL-only and combined variants on the same test set.
 
 The proposed operational protocol is detailed in tests/verification_plan.md (DIP-8): annotation and disagreement handling, campaign-grouped splits, training-only preprocessing, frozen validation thresholds, per-language metrics and uncertainty, and planned checks T1-T7. At the nominal 60/20/20 split, each language has approximately 30 fraudulent and 30 legitimate test messages; results will be pilot evidence with limited precision, not a broad performance guarantee. This protocol awaits team and supervisor review; no execution results are claimed.
 
@@ -268,24 +308,32 @@ Report configurations, dataset sizes and composition, threshold selection, metri
 
 # 11 Project management and risks
 
-| Participant | Planned responsibility | Verified contribution at this stage |
+| Participant | Planned responsibility | Recorded repository contribution |
 | --- | --- | --- |
-| Nurassyl Auesbekuly Kendebaev | Client, API, PostgreSQL, initial data collection and integration. | Initial repository and working documentation are available. Individual verification and team review are pending. |
-| Askhat Nurlanuly Amirkhanov | Text classification, URLs and domains, experiments and metrics. | The supplied proposal states this role. Commit history and actual completed tasks have not yet been verified. |
+| Nurassyl Auesbekuly Kendebaev | Client, API, PostgreSQL, initial data collection and integration. | Initial repository and documentation commits under Kendebaev, including e332442. See merged PR #1. Substantive supervisor review remains pending. |
+| Askhat Nurlanuly Amirkhanov | Text classification, URLs and domains, experiments and metrics. | Evaluation protocol (a9b3184), report alignment (bc27b60), and management records (ad92d01) under askmirkhanov-boop; merged PRs #2 and #3. These are documentation contributions, not completed experiments. |
 
-Repository: https://github.com/Kendebaev/FraudShieldYouTrack: https://frauddetect.youtrack.cloud/issues/DIPAccounts: Kendebaev and askmirkhanov-boop.
+Repository: https://github.com/Kendebaev/FraudShield
+
+YouTrack: https://frauddetect.youtrack.cloud/issues/DIP
+
+GitHub accounts: Kendebaev and askmirkhanov-boop.
+
+YouTrack accounts: admin (Nurassyl) and askmirkhanov (Askhat).
 
 ## Working process
 
-One repository serves both team members. Each task has an owner, expected outcome, acceptance criteria and deadline. Include its ID in the branch and commit/PR description; provide genuine commits under the contributor's account. Changes undergo a second-member review. Main contains agreed versions; intermediate drafts stay on branches.
+One repository serves both team members. Task IDs appear in branches and commit/PR descriptions. The current CSV records owners, expected work, acceptance criteria and priorities; task deadlines must be verified in YouTrack because they are not included in the supplied snapshot.
+
+PRs #1, #2 and #3 were merged on 24 October 2026, and main contains their changes. No formal GitHub reviews were recorded at the readiness check. A merge is not evidence of substantive peer review; the team still needs to record actual review findings and resulting corrections. Future changes should be reviewed by another team member before merging.
 
 The supervisor and commission need access to all materials. The current repository is publicly readable; verify reviewer access to private YouTrack resources or explicitly agree another accessible evidence route. Confirm access before submitting the form.
 
-## Immediate plan
+## Submission preparation
 
-21 October: discussions, evidence and scope.22 October: requirements traceability, data and architecture.23 October: supervisor review, corrections and access checks.24 October: final version, prob-period-1 tag, board PDF and form before 18:00. Recommended internal readiness deadline: 16:00 in the deadline's applicable time zone.
+Before the 24 October 2026 submission deadline of 18:00, review the remaining evidence, reconcile the report, verify commission access and prepare the final attachments. The required submission tag is `pre-defense-1`; it has not been created. A tag should identify the reviewed version actually submitted.
 
-Tasks beyond 24 October are provisional and do not replace the immediate plan. Fifteen tasks with criteria exist in YouTrack; management/tasks.csv is their snapshot. Infrastructure tasks are in progress, prepared documents are in review and remaining items are in the backlog. Completion is not claimed. The second member has no separate assigned YouTrack account yet; responsibility is recorded in task descriptions.
+The supplied 24 October snapshot contains 15 assigned tasks: 7 for Nurassyl/admin and 8 for Askhat/askmirkhanov. There are 8 Backlog, 2 Develop and 5 Review tasks; none are marked Done. The assignments identify responsibility, not completed work. See management/README.md, management/tasks.csv and the two-page board/task PDF.
 
 
 # 11 Risks and submission readiness
@@ -301,9 +349,13 @@ Tasks beyond 24 October are provisional and do not replace the immediate plan. F
 
 ## Outstanding evidence
 
-1. Each member's reviewed contribution and personal YouTrack access.2. Actual records of 3-5 discussions or documented client agreement.3. Substantive supervisor feedback and linked responses.4. Genuine individual contributions and team review.5. Updated PDF screenshots of the final board.6. Reviewer access to repository and tracker, a final tagged version and the submission form.
+1. Actual records of 3-5 user discussions or a documented client agreement.
+2. Substantive supervisor feedback and linked responses.
+3. A documented team review of the submitted materials; no formal GitHub reviews were recorded at the readiness check.
+4. Verification of task deadlines and reviewer access to the live tracker.
+5. The final reviewed submission tag and confirmation that the Microsoft form has been submitted.
 
-The proposals provided are not evidence of user discussions, experiments or code contributions. The form and screenshot PDF are prepared separately; access and formal submission remain unconfirmed.
+Repository contributions, personal task assignments and the updated screenshot PDF are now available. They do not establish completed interviews, experiments, peer review or supervisor approval. Access checks and formal submission remain unconfirmed.
 
 
 # 12 Defence preparation
@@ -329,49 +381,89 @@ The repository contains a README, report, diagrams, task snapshot and editable s
 
 # References
 
-[1] Cejas O. A., Guo Y., Tang Q. (2026). Large-Scale Multilingual SMS Fraud Detection For Telecom Networks. NLPAICS, scientific publication.https://aclanthology.org/2026.nlpaics-1.7/
+[1] Cejas O. A., Guo Y., Tang Q. (2026). Large-Scale Multilingual SMS Fraud Detection For Telecom Networks. NLPAICS, scientific publication.
 
-[2] Ali F. D. M. A. et al. (2025). MOZ-Smishing: A Benchmark Dataset for Detecting Mobile Money Frauds. AfricaNLP, scientific publication.https://aclanthology.org/2025.africanlp-1.23/
+https://aclanthology.org/2026.nlpaics-1.7/
 
-[3] Timko D., Rahman M. L. (2024). Smishing Dataset I: Phishing SMS Dataset from Smishtank.com. CODASPY, scientific publication; author version on arXiv.https://arxiv.org/abs/2402.18430
+[2] Ali F. D. M. A. et al. (2025). MOZ-Smishing: A Benchmark Dataset for Detecting Mobile Money Frauds. AfricaNLP, scientific publication.
 
-[4] Nahapetyan A. et al. (2024). On SMS Phishing Tactics and Infrastructure. IEEE S&amp;P, scientific publication; authors&#x27; materials.https://github.com/wspr-ncsu/sms-phishing
+https://aclanthology.org/2025.africanlp-1.23/
 
-[5] Hosseinpour S., Das S. (2025). POSTER: A Multi-Signal Model for Detecting Evasive Smishing. WiSec, scientific poster; author version on arXiv.https://arxiv.org/abs/2505.18233
+[3] Timko D., Rahman M. L. (2024). Smishing Dataset I: Phishing SMS Dataset from Smishtank.com. CODASPY, scientific publication; author version on arXiv.
 
-[6] Islam M. R. et al. (2024). PhishGuard: A Convolutional Neural Network Based Model for Detecting Phishing URLs with Explainability Analysis. Scientific preprint on arXiv.https://arxiv.org/abs/2404.17960
+https://arxiv.org/abs/2402.18430
 
-[7] Togmanov M. et al. (2025). KazMMLU: Evaluating Language Models on Kazakh, Russian, and Regional Knowledge of Kazakhstan. ACL, scientific publication.https://aclanthology.org/2025.acl-long.701/
+[4] Nahapetyan A. et al. (2024). On SMS Phishing Tactics and Infrastructure. IEEE S&P, scientific publication; authors' materials.
 
-[8] Conneau A. et al. (2020). Unsupervised Cross-lingual Representation Learning at Scale. ACL, foundational scientific publication.https://aclanthology.org/2020.acl-main.747/
+https://github.com/wspr-ncsu/sms-phishing
 
-[9] UCI Machine Learning Repository (2012). SMS Spam Collection. Dataset.https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+[5] Hosseinpour S., Das S. (2025). POSTER: A Multi-Signal Model for Detecting Evasive Smishing. WiSec, scientific poster; author version on arXiv.
 
-[10] Government portal of the Republic of Kazakhstan (2026). Law and order and protection of citizens&#x27; digital rights [translated title]. Official information on fraud.https://www.gov.kz/org/aqmola-selinograd/press/news/details/1308837?lang=ru
+https://arxiv.org/abs/2505.18233
+
+[6] Islam M. R. et al. (2024). PhishGuard: A Convolutional Neural Network Based Model for Detecting Phishing URLs with Explainability Analysis. Scientific preprint on arXiv.
+
+https://arxiv.org/abs/2404.17960
+
+[7] Togmanov M. et al. (2025). KazMMLU: Evaluating Language Models on Kazakh, Russian, and Regional Knowledge of Kazakhstan. ACL, scientific publication.
+
+https://aclanthology.org/2025.acl-long.701/
+
+[8] Conneau A. et al. (2020). Unsupervised Cross-lingual Representation Learning at Scale. ACL, foundational scientific publication.
+
+https://aclanthology.org/2020.acl-main.747/
+
+[9] UCI Machine Learning Repository (2012). SMS Spam Collection. Dataset.
+
+https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+
+[10] Government portal of the Republic of Kazakhstan (2026). Law and order and protection of citizens' digital rights [translated title]. Official information on fraud.
+
+https://www.gov.kz/org/aqmola-selinograd/press/news/details/1308837?lang=ru
 
 Access and documentation check date: 20 October 2026. The first eight entries [1-8] are scientific works; the others are data, official materials and documentation. Links continue on the next page.
 
 
 # References continued
 
-[11] Bitdefender (n.d.). Scamio. Official product description.https://www.bitdefender.com/en-sg/consumer/scamio
+[11] Bitdefender (n.d.). Scamio. Official product description.
 
-[12] Norton (n.d.). FAQ: Norton Genie. Official product support.https://support.norton.com/sp/en/us/home/current/solutions/v20230717145233467
+https://www.bitdefender.com/en-sg/consumer/scamio
 
-[13] VirusTotal (n.d.). How it works; Private Scanning. Official documentation.https://docs.virustotal.com/docs/how-it-works
+[12] Norton (n.d.). FAQ: Norton Genie. Official product support.
 
-[14] Google (n.d.). Safe Browsing. Official documentation.https://developers.google.com/safe-browsing
+https://support.norton.com/sp/en/us/home/current/solutions/v20230717145233467
 
-[15] FastAPI (n.d.). Features. Official documentation.https://fastapi.tiangolo.com/features/
+[13] VirusTotal (n.d.). How it works; Private Scanning. Official documentation.
 
-[16] Express (n.d.). Express web framework. Official documentation.https://expressjs.com/
+https://docs.virustotal.com/docs/how-it-works
 
-[17] PostgreSQL (n.d.). JSON Types. Official documentation.https://www.postgresql.org/docs/current/datatype-json.html
+[14] Google (n.d.). Safe Browsing. Official documentation.
 
-[18] Telegram (n.d.). Telegram Mini Apps. Official documentation.https://core.telegram.org/bots/webapps
+https://developers.google.com/safe-browsing
 
-[19] scikit-learn (n.d.). Text feature extraction. Official documentation.https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction
+[15] FastAPI (n.d.). Features. Official documentation.
 
-[20] Microsoft (n.d.). ASP.NET Core APIs overview. Official documentation.https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis?view=aspnetcore-10.0
+https://fastapi.tiangolo.com/features/
+
+[16] Express (n.d.). Express web framework. Official documentation.
+
+https://expressjs.com/
+
+[17] PostgreSQL (n.d.). JSON Types. Official documentation.
+
+https://www.postgresql.org/docs/current/datatype-json.html
+
+[18] Telegram (n.d.). Telegram Mini Apps. Official documentation.
+
+https://core.telegram.org/bots/webapps
+
+[19] scikit-learn (n.d.). Text feature extraction. Official documentation.
+
+https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction
+
+[20] Microsoft (n.d.). ASP.NET Core APIs overview. Official documentation.
+
+https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis?view=aspnetcore-10.0
 
 Additional VirusTotal privacy documentation: https://docs.virustotal.com/docs/private-scanning. Published product descriptions require practical verification; pricing and usage conditions have not been assumed.

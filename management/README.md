@@ -28,3 +28,7 @@ We use Backlog for planned work, Develop for work in progress and Review for mat
 The screenshots retain YouTrack's Russian interface. Task titles, this document, the CSV and the PDF captions are in English.
 
 Board: https://frauddetect.youtrack.cloud/agiles/204-1/current
+
+## Readiness notes
+
+See [contribution records](contributions.md) for commit links and remaining review checks. The CSV is preserved as supplied: deadlines require verification in YouTrack, and DIP-12 still names `prob-period-1`. The written submission requirements specify `pre-defense-1`; reconcile this wording in the live task before submission. No submission tag has been created.

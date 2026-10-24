@@ -2,6 +2,10 @@
 
 Status: design mockups, not an implemented application. See report section 9.
 
+![Checking, result and error screens](mockups.png)
+
+[Editable vector source](mockups.svg). These three screens are restored from the original report at commit e332442. Text and geometry are preserved; they are illustrative, not screenshots of a working application.
+
 ## Checking screen
 Title, RU/KZ language selector, privacy note, 1-5000 character input and analyse button. History is off by default. Disable the button while a request is running.
 
