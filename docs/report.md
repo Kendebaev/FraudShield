@@ -333,7 +333,7 @@ The supervisor and commission need access to all materials. The current reposito
 
 ## Submission preparation
 
-Before the 24 October 2026 submission deadline of 18:00, review the remaining evidence, reconcile the report, verify commission access and prepare the final attachments. The required submission tag is `pre-defense-1`; it has not been created. A tag should identify the reviewed version actually submitted.
+Before the 24 October 2026 submission deadline of 18:00, review the remaining evidence, reconcile the report, verify commission access and prepare the final attachments. The `pre-defense-1` tag identifies the first pre-defense submission snapshot. Use the PDF attachments from that same tagged version. The tag does not establish supervisor approval; after submission, it must remain fixed.
 
 The supplied 24 October snapshot contains 15 assigned tasks: 7 for Nurassyl/admin and 8 for Askhat/askmirkhanov. There are 8 Backlog, 2 Develop and 5 Review tasks; none are marked Done. The assignments identify responsibility, not completed work. See management/README.md, management/tasks.csv and the two-page board/task PDF.
 

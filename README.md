@@ -47,6 +47,7 @@ The management snapshot records 7 tasks for Nurassyl/admin and 8 for Askhat/askm
 
 ## Submission version
 
-The [pre-defense-1 tag](https://github.com/Kendebaev/FraudShield/tree/pre-defense-1) exists. At this status check, it points to commit `5ccc71e`, which includes PR #4 but predates the contents-page update in PR #5 and the supervisor-recommendation record in PR #6. Therefore, the tagged snapshot differs from current `main`. Confirm the intended submission version and matching PDF attachments before submitting; do not move a tag already submitted to the committee.
+The [pre-defense-1 tag](https://github.com/Kendebaev/FraudShield/tree/pre-defense-1) identifies the first pre-defense submission snapshot. Use the report and YouTrack PDFs from that same tag when submitting. The tag records a repository version, not supervisor approval. Once submitted to the committee, keep the tag fixed; subsequent work belongs in later commits.
+
 
 See [report build instructions](docs/BUILD_REPORT.md) to regenerate the PDF from its sources.
