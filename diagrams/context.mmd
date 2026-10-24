@@ -1,0 +1,5 @@
+flowchart LR
+ U[RU/KZ user] -->|Text| S[Message checking system]
+ S -->|Risk and explanation| U
+ T[Team] -->|Corpus and versions| S
+ S -.->|URL only, optional| R[External reputation service]

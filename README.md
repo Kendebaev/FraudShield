@@ -1,37 +1,41 @@
-# Development of an Application for Detecting Phishing and Fraudulent Messages
+# FraudShield
 
-Приложение для ручной проверки подозрительных сообщений на русском и казахском языках в Казахстане. Цель - уровень риска, объяснение и рекомендации на основе текста и URL.
+## Development of an Application for Detecting Phishing and Fraudulent Messages
 
-## Команда
-- Кендебаев Нұрасыл Ауесбекұлы, SE-2428: клиент, серверный API, БД, сбор данных и интеграция. GitHub: https://github.com/Kendebaev (страница аккаунта проверена; подтвердить использование для диплома).
-- Амирханов Асхат Нурланулы, SE-2428: анализ текста/URL, классификация и оценка. Аккаунт ещё не предоставлен.
-- Руководитель: Серек Азамат Галымжанович, ассоциированный профессор.
+We are developing FraudShield to help users in Kazakhstan assess suspicious messages in Russian and Kazakh. Our planned application analyses message text and URL structure, highlights risk indicators and explains the result.
 
-## Область и статус
-Включены анализ, требования, архитектура, макеты, протокол данных и оценки. Код приложения, локальные эксперименты, пользовательские интервью и фактический review ещё не подтверждены. Полное приложение к первому этапу не требуется.
+## Current status
 
-MVP: ручная вставка текста, локальный разбор URL без открытия, объяснение, история по согласию. Авточтение чатов, SMS и звонки вне scope.
+We are at the analysis and design stage. Our repository contains the project report, literature review, system and technology comparisons, requirements, architecture diagrams, interface mockups and an evaluation plan. We track 15 project tasks in [YouTrack](https://frauddetect.youtrack.cloud/issues/DIP).
 
-## Предварительный стек
-React web, Express API, FastAPI analyzer, PostgreSQL, Docker; Telegram Mini App опционально. Решения требуют проверки командой, см. отчёт.
+The application has not been implemented yet, so there are no installation instructions, runtime environment variables or executable application tests at this stage. We have no measured detection results. Interview records and substantive supervisor feedback are not included in the current materials. Our documentation is awaiting team and supervisor review.
 
-## Материалы
-- docs/Diploma_Report_Working.pdf - единый рабочий отчёт.
-- docs/report.md - редактируемый текст.
-- docs/references.json - 20 источников, включая 8 научных работ.
-- diagrams/ - исходники Mermaid/PlantUML и читаемые PDF-экспорты.
-- prototype/wireframes.md - спецификация макетов.
-- management/tasks.csv - 15 предложенных задач, ответственные и приёмка.
-- evidence/ - бланки реальных интервью и review; не доказательства выполнения.
-- tests/verification_plan.md - план тестирования.
+## Planned application
 
-## Ссылки и доступ
-URL репозитория: https://github.com/Kendebaev/FraudShield
-URL YouTrack: https://frauddetect.youtrack.cloud/issues/DIP
-Перед сдачей открыть доступ руководителю и комиссии и проверить ссылки с их стороны.
+Our MVP covers manual message entry, local URL parsing without opening links, risk explanations and optional check history. It does not include automatic access to private chats or SMS, call analysis or payment blocking.
 
-## Запуск и тестирование
-Работающего приложения в этом пакете нет. PDF открывается обычным просмотрщиком. После появления кода добавить инструкции запуска, переменные окружения и проверяемые команды тестирования.
+Our proposed stack is React, Express, FastAPI and PostgreSQL. We are considering a Telegram Mini App as an additional interface. These choices are provisional.
 
-## Процесс
-Каждый участник работает под своим аккаунтом. Задача -> ветка с ID -> PR -> review -> merge. История фиксирует настоящую работу; не создавать фиктивные коммиты, задние даты или вклад второго участника. Финальный отчёт и снимки реальной доски должны совпадать с тегом `prob-period-1`, указанным в форме. Отправляет один представитель команды до 18:00 24 октября 2026 года.
+## Team
+
+| Member | Planned responsibility | Account |
+| --- | --- | --- |
+| Nurassyl Auesbekuly Kendebaev, SE-2428 | Client, API, database, data collection and integration | [Kendebaev](https://github.com/Kendebaev) |
+| Askhat Nurlanuly Amirkhanov, SE-2428 | Text and URL analysis, classification and evaluation | [askmirkhanov-boop](https://github.com/askmirkhanov-boop) |
+
+Our supervisor is Azamat Galymzhanovich Serek, Associate Professor.
+
+## Project materials
+
+- [Project report](docs/Diploma_Report_Working.pdf) and [editable text](docs/report.md)
+- [References](docs/references.json): 20 sources, including 8 scientific works
+- [Architecture diagrams](diagrams/) with editable sources and PDF exports
+- [Interface specification](prototype/wireframes.md)
+- [Evaluation plan](tests/verification_plan.md)
+- [Task list](management/tasks.csv) and [task-to-material links](management/task_links.md)
+- [Actual board and task screenshots](management/YouTrack_Board_and_Tasks.pdf)
+- [Interview and supervisor-feedback templates](evidence/), currently unfilled
+
+## Project organisation
+
+We use YouTrack for tasks and GitHub branches and pull requests for changes. Our current documentation is in [draft PR #1](https://github.com/Kendebaev/FraudShield/pull/1). Review is pending, and the final submission tag has not been created.

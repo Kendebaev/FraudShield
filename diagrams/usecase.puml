@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "User" as U
+rectangle "Message checking system" {
+ usecase "UC1 Check text and URLs" as C
+ usecase "UC2 Read explanation" as E
+ usecase "UC3 Save with consent" as S
+ usecase "UC4 View and delete history" as H
+}
+U --> C
+U --> E
+U --> S
+U --> H
+note right of S: Sign-in and explicit consent required
+note right of H: Own records only
+@enduml
