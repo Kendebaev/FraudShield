@@ -20,6 +20,8 @@ The project supports manual checking of suspicious text and links, with explanat
 Status: working draft for team and supervisor review. User interviews, verified test results and substantive supervisor feedback require actual evidence. Section 11 lists the outstanding evidence.
 
 
+<!-- TOC -->
+
 # 1 Project proposal
 
 ## Problem and target audience
@@ -356,27 +358,6 @@ The supplied 24 October snapshot contains 15 assigned tasks: 7 for Nurassyl/admi
 5. The final reviewed submission tag and confirmation that the Microsoft form has been submitted.
 
 Repository contributions, personal task assignments and the updated screenshot PDF are now available. They do not establish completed interviews, experiments, peer review or supervisor approval. Access checks and formal submission remain unconfirmed.
-
-
-# 12 Defence preparation
-
-## Suggested project introduction
-
-We are developing an assistant for checking suspicious messages in Russian and Kazakh. Users paste text manually and receive risk indicators, explanations and advice. The diploma will evaluate rules, a simple text classifier and a multilingual model with URL signals. One member covers the client, API and database; the other covers analysis and evaluation. Quality will be measured on a fixed local corpus against reproducible baselines.
-
-## Repository structure and submission package
-
-| Question | Evidence for the answer |
-| --- | --- |
-| Who needs this project and why? | Problem evidence [10] and actual discussions once conducted. Distinguish hypotheses from findings. |
-| How does it differ from Scamio and Genie? | Independent engineering and verifiable local evaluation; superiority is not yet demonstrated. |
-| Why this stack? | Section 5, requirements and integration costs. Simplify based on prototype findings. |
-| What does suspicious mean? | An uncertainty region and indicators, not a guaranteed diagnosis or an unqualified third ground-truth class. |
-| How will you establish quality? | B0/B1/B2, grouped test split, RU/KZ metrics, FPR, recall, confidence intervals and latency. |
-| What did each member do? | Show personal tasks, changes and reviews; explain every decision. |
-| What already works? | Demonstrate only code that actually runs. These materials cover analysis and design, not a complete application. |
-
-The repository contains a README, report, diagrams, task snapshot and editable sources for team review. Each participant should commit genuine work under their own account. The submission requires two PDFs: the unified report and real board/task screenshots.
 
 
 # References
